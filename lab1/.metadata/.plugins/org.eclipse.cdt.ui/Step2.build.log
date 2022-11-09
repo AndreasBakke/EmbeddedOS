@@ -1,0 +1,9 @@
+10:44:46 **** Clean-only build of configuration Default for project Step2 ****
+/home/evidence/workspace/lab1/Step2/Debug/make_launcher.bat clean 
+Cannot run program "/home/evidence/workspace/lab1/Step2/Debug/make_launcher.bat": Unknown reason
+
+Error: Program "/home/evidence/workspace/lab1/Step2/Debug/make_launcher.bat" not found in PATH
+PATH=[/opt/case/evidence/eclipse:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/bin:/opt/case/emulator/simppc_linux32bit/]
+
+10:44:46 Build Finished (took 39ms)
+

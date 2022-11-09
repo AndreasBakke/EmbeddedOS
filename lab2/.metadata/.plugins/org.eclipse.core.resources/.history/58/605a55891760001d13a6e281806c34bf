@@ -1,0 +1,95 @@
+CPU test_application {
+	OS emergency_buoy {
+	 //Board setup
+		EE_OPT = "DEBUG";
+		EE_OPT = "__USE_LEDS__";
+		EE_OPT = "__USE_BUTTONS__";
+		EE_OPT = "__E200ZX_EXECUTE_FROM_RAM__";
+		EE_OPT = "EE_ISR_DYNAMIC_TABLE";
+		EE_OPT = "EE_LAUTERBACH_DEMO_SIM";
+		//flags for compiler
+		CFLAGS = "";
+		ASFLAGS = "";
+		LDFLAGS = "";
+		
+
+		//target CPU information (chip)
+		CPU_DATA = PPCE200ZX {
+			MODEL = E200Z7;
+			APP_SRC = "code.c";
+			MULTI_STACK = TRUE {
+				IRQ_STACK = TRUE {
+					SYS_SIZE = 4096; //stack
+
+				};
+			};
+			COMPILER_TYPE = GNU;
+			/* VLE = TRUE; */
+		};
+		MCU_DATA = PPCE200ZX { //MCU information
+			MODEL = MPC5674F;
+		};
+
+		//all above standard common
+		STATUS = EXTENDED;
+		STARTUPHOOK = TRUE; //* 
+		ERRORHOOK = TRUE; //*
+		SHUTDOWNHOOK = FALSE;
+		PRETASKHOOK = FALSE;
+		POSTTASKHOOK = FALSE;
+		USEGETSERVICEID = FALSE;
+		USEPARAMETERACCESS = FALSE;
+		USERESSCHEDULER = TRUE;
+
+		/* Setup Kernel Type */
+		KERNEL_TYPE = ECC2; //Conformance class ECC2, tells which kernel type we want
+
+		/* Enable ORTI support for Lauterbach Tracer */
+		ORTI_SECTIONS = ALL;
+	};
+    
+    EVENT TimerEvent1 {
+		MASK = AUTO;
+	};
+	
+	EVENT BroadcastEvent {
+		MASK = AUTO;
+	};
+	
+    
+    TASK SenderTask {
+		PRIORITY = 0x01; 
+		SCHEDULE = FULL;
+		AUTOSTART = TRUE;
+		STACK = PRIVATE {
+			SYS_SIZE = 1024;
+		};
+		ACTIVATION = 1;
+		EVENT = TimerEvent1;
+		EVENT = BroadcastEvent;
+	};	
+	
+	
+
+    ALARM AlarmTask1 {
+    	COUNTER = myCounter;
+    	ACTION = SETEVENT {
+			TASK = SenderTask; //send to task1
+			EVENT = TimerEvent1; //timer event
+		};
+		AUTOSTART = TRUE { //start when counter at 250 then every 500
+			ALARMTIME = 1000;
+			CYCLETIME = 4000;	
+		};
+    };
+  
+	COM EE_Com {
+     COMERRORHOOK = FALSE;
+     COMUSEGETSERVICEID = FALSE;
+     COMUSEPARAMETERACCESS = FALSE;
+     COMAPPMODE = "LAB1_APPMODE";
+     COMSTATUS = COMSTANDARD;
+     COMSTARTCOMEXTENSION = TRUE;
+     COMTYPE = CCCA;
+    };
+};

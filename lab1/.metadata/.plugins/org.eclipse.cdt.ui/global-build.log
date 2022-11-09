@@ -1,0 +1,60 @@
+11:07:32 **** Build of configuration Default for project step1 ****
+/home/evidence/workspace/lab1/step1/Debug/make_launcher.bat all 
+Using erika files in /opt/case/evidence/eclipse/plugins/com.eu.evidence.ee_2.4.0.N20140917_2014/ee_files
+GEN ram_gnu.ld
+MAKE_DIRECTORIES
+ASM   ee_boot.S
+CC    eecfg.c
+CC    code.c
+../code.c:20:0: warning: "__USE_LEDS__" redefined [enabled by default]
+<command-line>:0:0: note: this is the location of the previous definition
+../code.c:21:0: warning: "__USE_BUTTONS__" redefined [enabled by default]
+<command-line>:0:0: note: this is the location of the previous definition
+ASM   ee_entry.S
+ASM   ee_irq_stack.S
+ASM   ee_oo.S
+ASM   ee_context.S
+CC    ee_hal_structs.c
+CC    ee_context.c
+CC    ee_e200zx_cpu.c
+ASM   ee_ivor.S
+CC    ee_irq.c
+CC    ee_activate.c
+CC    ee_schedule.c
+CC    ee_force_schedule.c
+CC    ee_gettaskstate.c
+CC    ee_gettaskid.c
+CC    ee_terminat.c
+CC    ee_thendin.c
+CC    ee_irqendin.c
+CC    ee_tstub.c
+CC    ee_tnterm.c
+CC    ee_lookup.c
+CC    ee_rq_exchg.c
+CC    ee_rq_inser.c
+CC    ee_shtdown.c
+CC    ee_startos.c
+CC    ee_rq_first.c
+CC    ee_chaintas.c
+CC    ee_lockres.c
+CC    ee_ulockres.c
+CC    ee_ulockallres.c
+CC    ee_alcancel.c
+CC    ee_algetbase.c
+CC    ee_alget.c
+CC    ee_alsetabs.c
+CC    ee_alsetrel.c
+CC    ee_altick.c
+CC    ee_getcountervalue.c
+CC    ee_getelapsedvalue.c
+CC    ee_evclear.c
+CC    ee_evget.c
+CC    ee_evset.c
+CC    ee_evwait.c
+AR  libee.a
+LD
+
+Compilation terminated successfully
+
+Copying exec_lauterbach.sh...
+

@@ -1,0 +1,18 @@
+15:35:15 **** Incremental Build of configuration Default for project src ****
+/home/evidence/workspace/lab2/src/Debug/make_launcher.bat all 
+Using erika files in /opt/case/evidence/eclipse/plugins/com.eu.evidence.ee_2.4.0.N20140917_2014/ee_files
+CC    code.c
+../code.c:7:0: warning: "__USE_LEDS__" redefined [enabled by default]
+<command-line>:0:0: note: this is the location of the previous definition
+../code.c:8:0: warning: "__USE_BUTTONS__" redefined [enabled by default]
+<command-line>:0:0: note: this is the location of the previous definition
+../code.c: In function 'FuncSenderTask':
+../code.c:92:2: warning: excess elements in array initializer [enabled by default]
+../code.c:92:2: warning: (near initialization for 'sosMessage') [enabled by default]
+LD
+
+Compilation terminated successfully
+
+
+15:35:15 Build Finished (took 118ms)
+

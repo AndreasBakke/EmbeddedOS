@@ -1,0 +1,11 @@
+10:45:44 **** Incremental Build of configuration Default for project step4 ****
+/home/evidence/workspace/lab1/step4/Debug/make_launcher.bat all 
+Using erika files in /opt/case/evidence/eclipse/plugins/com.eu.evidence.ee_2.4.0.N20140917_2014/ee_files
+CC    Com.c
+LD
+
+Compilation terminated successfully
+
+
+10:45:45 Build Finished (took 357ms)
+
