@@ -79,6 +79,9 @@ void StartupHook(void) { //runs at boot . can be done at initial part in main. h
 	EE_leds(0x00);
 }
 
+
+//Consider splitting task into two. One that keeps track of the bits, and sends bit by bit a message, and one that blinks light.
+//If message = 1, set led on, if message =0, turn it off.
 TASK( SenderTask) {
 	EventMaskType mask1;
 	static int sosMessage[34]={
@@ -137,22 +140,6 @@ int main(void) {
 	return 0;
 
 }
-
-
-//IDEA:
-/*
-	Task1: Wait for button activation
-		When activated. Send the message on repeat to Task 2, 1 symbol at a time every 100ms (alarm)
-		ButtonPress again => TerminateTask?
-	Task2: Basic task activated on message recieved. Turn lights on/off depending on 1 or 0. 1= on, 0 is turn of.
-	Message: 101010 000 111011101110 000 101010 0000 =  1010100001110111011100001010100000
-				S	- 		O		 -		S	 -    Repeat
- 	MessageLength = 35
-
- */
-
-
-
 
 
 

@@ -31,9 +31,6 @@ sYmbol.SourcePATH.SetRecurseDir .
 ; setup simulator disassemble mode
 SYStem.Option DisMode AUTO
 
-Break.RESet
-Break.Set   FuncTask2 /Program /Spot
-
 ; setup TRACE32 OSEK/ORTI awareness
 TASK.ORTI system.orti
 
