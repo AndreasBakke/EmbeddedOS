@@ -1,0 +1,12 @@
+.\objects\lib_math.o: Software\uC-LIB\lib_math.c
+.\objects\lib_math.o: .\Software\uC-LIB\lib_math.h
+.\objects\lib_math.o: .\Software\uC-CPU\ARM-Cortex-M3\cpu.h
+.\objects\lib_math.o: .\Software\uC-CPU\cpu_def.h
+.\objects\lib_math.o: .\Software\user\configuration_os\cpu_cfg.h
+.\objects\lib_math.o: .\Software\uC-CPU\cpu_core.h
+.\objects\lib_math.o: .\Software\uC-LIB\lib_def.h
+.\objects\lib_math.o: .\Software\uC-LIB\lib_mem.h
+.\objects\lib_math.o: .\Software\uC-CPU\cpu_core.h
+.\objects\lib_math.o: .\Software\user\configuration_os\app_cfg.h
+.\objects\lib_math.o: .\Software\uC-LIB\lib_str.h
+.\objects\lib_math.o: .\Software\uC-LIB\lib_ascii.h
