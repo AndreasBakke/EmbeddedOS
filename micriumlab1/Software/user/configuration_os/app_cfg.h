@@ -48,7 +48,9 @@
 *********************************************************************************************************
 */
 
-
+#define OS_CFG_TASK_DEL_EN 1
+#define OS_CFG_TMR_EN 1
+#define	 OS_TMR_EN 1
 /*
 *********************************************************************************************************
 *                                            TASK PRIORITIES
@@ -56,8 +58,8 @@
 */
 #define  OS_LOWEST_PRIO 													5u
 #define  APP_CFG_TASK_PRIO                  			8u
-#define  GUI_CFG_TASK_PRIO                       	7u
-#define  INPUT_CFG_TASK_PRIO											6u 
+#define  TASK_1_PRIO                       				3u
+#define  TASK_2_PRIO															4u 
 
 
 #define  OS_TASK_TMR_PRIO                         (OS_LOWEST_PRIO - 2)
@@ -82,6 +84,7 @@
 #define  LIB_MEM_CFG_ARG_CHK_EXT_EN             DEF_ENABLED
 #define  LIB_MEM_CFG_ALLOC_EN                   DEF_ENABLED
 #define  LIB_MEM_CFG_HEAP_SIZE                     15*1024u
+
 
 
 /*

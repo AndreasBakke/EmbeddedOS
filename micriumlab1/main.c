@@ -17,18 +17,22 @@
 int down_KEY1;
 int down_KEY2;
 int down_KEY3;
+int down_KEY4;
 unsigned short AD_current; 
      /* ----------------- APPLICATION GLOBALS ------------------ */
 
 /* Definition of the Task Control Blocks for three tasks */
 static  OS_TCB        APP_TSK_TCB;
-static	OS_TCB			  GUI_TSK_TCB;
-static	OS_TCB				INPUT_TSK_TCB;
+static	OS_TCB			  TASK_1_TCB;
+static	OS_TCB				TASK_2_TCB;
+
+static OS_TMR  Task1Tmr;
+static OS_TMR  Task2Tmr;	
 
 /* Definition of the Stacks for three tasks */
 static  CPU_STK_SIZE  APP_TSK_STACK[APP_CFG_TASK_STK_SIZE];
-static	CPU_STK_SIZE	GUI_TSK_STACK[APP_CFG_TASK_STK_SIZE];
-static  CPU_STK_SIZE	INPUT_TSK_STACK[APP_CFG_TASK_STK_SIZE];
+static	CPU_STK_SIZE	TASK_1_STACK[APP_CFG_TASK_STK_SIZE];
+static  CPU_STK_SIZE	TASK_2_STACK[APP_CFG_TASK_STK_SIZE];
 
 /* Global Variables*/
 uint16_t position = 0;
@@ -51,8 +55,10 @@ static void App_TaskCreate(void);
 
 /* Task functions */
 static void APP_TSK ( void   *p_arg );
-//static void GUI_TSK ( void * p_args );
-//static void INPUT_TSK ( void * p_args );
+static void TASK_1 ( void * p_args );
+static void TASK_2 ( void * p_args );
+static void timer1_callback ( OS_TMR  *p_tmr, void * p_args );
+static void timer2_callback ( OS_TMR  *p_tmr, void * p_args );
 /**********************************************************************************************************
 *                                                main()
 *
@@ -81,7 +87,26 @@ int  main (void)
     Mem_Init();							/*Memory initialization*/
 
     OSInit(&err);						/* Initialize "uC/OS-III, The Real-Time Kernel"         */
+		
 	
+	
+		OSTmrCreate(&Task1Tmr,         				/* p_tmr          */
+									 "Task1Timer",           	   /* p_name         */
+										10,                    /* dly            */
+										5,                    /* period         */
+										OS_OPT_TMR_PERIODIC,   /* opt            */
+										timer1_callback,         				 /* p_callback     */
+										0,                     /* p_callback_arg */
+									 &err); 
+
+		OSTmrCreate(&Task2Tmr,         				/* p_tmr          */
+									 "Task2Timer",           	   /* p_name         */
+										10,                    /* dly            */
+										5,                    /* period         */
+										OS_OPT_TMR_PERIODIC,   /* opt            */
+										timer2_callback,         				 /* p_callback     */
+										0,                     /* p_callback_arg */
+									 &err);  
 	
     OSTaskCreate((OS_TCB     *)&APP_TSK_TCB,               /* Create the start task                                */
                  (CPU_CHAR   *)"APP_TASK",
@@ -130,7 +155,8 @@ static  void  APP_TSK (void *p_arg)
 {
     (void)p_arg;        /* See Note #1                                          */
 		OS_ERR  os_err;
-
+		OS_ERR err;
+		CPU_BOOLEAN  status;
 	
 		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
 		LED_init(); 
@@ -142,81 +168,115 @@ static  void  APP_TSK (void *p_arg)
 	
 		BUTTON_init();
 	
-		//PWM_init();
-		//PWM_enable();
-
-    //Test led functions
-		
-
-	
-		//Clear the display in ble
 		LCD_Clear(Blue);
-		//Draw a line on screen
-		LCD_DrawLine( 10, 10, 100, 100 , White );
-		//Write a char on screen
-		PutChar( 50, 50, 'a', Green, White );
-		//Write a string on screen
-		GUI_Text(10, 200, (uint8_t *) "Pippo",White, Green);
-    //Test ADC conversion. When conversion is complete an interrupt is dispatched
-		ADC_start_conversion ();
-		OSTimeDlyHMSM (0,0,0,5,OS_OPT_TIME_TIMEOUT ,&os_err);
-		uint8_t * val1[16];
-		tostring((uint8_t*) val1, AD_current);
-		GUI_Text(10, 200, (uint8_t*)  val1 ,White, Green);
-
-	  //Led out set led status based on a bitmask
-	  //LED_Out(0);
-	  //Led on turns on a specific led
-		//LED_On(7);
-	  //Led off turns off a specific led
-		//LED_Off(0);
-	
-	  int i=0;
 		while (DEF_TRUE) {   
-													 
-					//Joystick has no interrupt it can be polled
-					if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){
-						 GUI_Text(10, 250, (uint8_t*)  "JOY UP" ,White, Red);
-					}		
-					if((LPC_GPIO1->FIOPIN & (1<<25)) == 0){	/* Joytick Select pressed */
-						 GUI_Text(10, 250, (uint8_t*)  "JOY PRESSED" ,White, Red);
-					} 
-					else if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joytick down pulled */
-						 GUI_Text(10, 250, (uint8_t*)  "JOY DOWN" ,White, Red);
-					}
-					else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joytick right pulled */
-						 GUI_Text(10, 250, (uint8_t*)  "JOY LEFT" ,White, Red);
-					}
-					else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right pulled */
-						 GUI_Text(10, 250, (uint8_t*)  "JOY RIGHT" ,White, Red);
-					}
 					
 					
 					if (down_KEY1 == 1) {
-						  i++;
-							GUI_Text(10, 240, (uint8_t*)  "BUTTON1" ,White, Red);
-							tostring((uint8_t*) val1, i);
-						  GUI_Text(100, 240, (uint8_t*)  val1 ,White, Red);
+						GUI_Text(10, 240, (uint8_t*)  "Tasks Started" ,White, Blue);
+						//Activate Task 1
+							OSTmrStart(&Task1Tmr, &err);
+							OSTmrStart(&Task2Tmr, &err);
 							down_KEY1 = 0;
+							
 					}
 					
+			
+					
 					if (down_KEY2 == 1) {
-						  i++;
-							GUI_Text(10, 260, (uint8_t*)  "BUTTON2" ,White, Red);
-							tostring((uint8_t*) val1, i);
-						  GUI_Text(100, 260, (uint8_t*)  val1 ,White, Red);
-							down_KEY2 = 0;
+						LCD_Clear(Blue); //Clear LCD
+						GUI_Text(10, 260, (uint8_t*)  "Task1 Stopped" ,White, Blue);
+						//Stop Task 1
+						OSTmrStop(&Task1Tmr,
+											OS_OPT_TMR_NONE,
+											(void *)0,
+											&err
+													);
+						down_KEY2 = 0;
 					}
 					
 					if (down_KEY3 == 1) {
-						  i++;
-							GUI_Text(10, 280, (uint8_t*)  "BUTTON3" ,White, Red);
-							tostring((uint8_t*) val1, i);
-						  GUI_Text(100, 280, (uint8_t*)  val1 ,White, Red);
-							down_KEY3 = 0;
+						GUI_Text(10, 280, (uint8_t*)  "Task2 Stopped" ,White, Blue);
+						LED_Out(0x00);//Clear leds
+						OSTmrStop(&Task2Tmr,
+											OS_OPT_TMR_NONE,
+											(void *)0,
+											&err
+											);
+						down_KEY3 =0;
+						
 					}
 		}
 		
+}
+
+int i = 0;
+
+
+void timer1_callback(OS_TMR  *p_tmr,
+                     void    *p_arg){
+	OS_ERR err;
+	OSTaskCreate((OS_TCB     *)&TASK_1_TCB,               /* Create the start task                                */
+                 (CPU_CHAR   *)"TASK_1_Task",
+                 (OS_TASK_PTR ) TASK_1,
+                 (void       *) 0,
+                 (OS_PRIO     ) TASK_1_PRIO,
+                 (CPU_STK    *)&TASK_1_STACK[0],
+                 (CPU_STK     )(APP_CFG_TASK_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) APP_CFG_TASK_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
+}
+										 
+void timer2_callback(OS_TMR  *p_tmr,
+                     void    *p_arg){
+	OS_ERR err;
+	OSTaskCreate((OS_TCB     *)&TASK_2_TCB,               /* Create the start task                                */
+                 (CPU_CHAR   *)"TASK_2_Task",
+                 (OS_TASK_PTR ) TASK_2,
+                 (void       *) 0,
+                 (OS_PRIO     ) TASK_2_PRIO,
+                 (CPU_STK    *)&TASK_2_STACK[0],
+                 (CPU_STK     )(APP_CFG_TASK_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) APP_CFG_TASK_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
+					
+}
+
+char message[80] = "The Answer to the Ultimate Question of Life, the Universe, and Everything is 42";
+uint8_t * val1[16];
+
+void TASK_1 (void *p_arg)
+{
+	(void)p_arg;
+	OS_ERR err;
+	i=(i+1)%80;
+	char disp=message[i];
+	tostring((uint8_t*) val1, message[i]);
+	GUI_Text(50, 50,  "t" ,White, Blue);
+	GUI_Text(50,70, (uint8_t *) val1, White, Blue);
+	OSTaskDel((OS_TCB *)0, &err);
+}
+int led_position=0x01;
+
+void TASK_2 (void *p_arg)
+{
+	(void)p_arg;
+	OS_ERR err;
+	if (led_position >= 0b10000000) {
+		led_position = 0x01;
+	} else {
+		led_position = led_position <<1;
+	}
+	LED_Out(led_position);
+	OSTaskDel((OS_TCB *)0, &err);
 }
 
 
