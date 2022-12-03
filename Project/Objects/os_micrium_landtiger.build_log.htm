@@ -1,0 +1,132 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.37.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Stefano Di Carlo, Politecnico di Torino, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.37.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLAN5\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.37.0.0
+Dialog DLL:      DARMP1.DLL V1.28.1.0
+Target DLL:      UL2CM3.DLL V1.164.7.0
+Dialog DLL:      TARMP1.DLL V1.27.1.0
+ 
+<h2>Project:</h2>
+Z:\EmbeddedOS\Project\os_micrium_landtiger.uvprojx
+Project File Date:  12/03/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCLAN5\Bin'
+Build target 'Target 1'
+Note: source file '.\Board\GLCD\AsciiLib.c' - object file renamed from '.\Objects\AsciiLib.o' to '.\Objects\asciilib_1.o'.
+Note: source file '.\Board\GLCD\GLCD.c' - object file renamed from '.\Objects\GLCD.o' to '.\Objects\glcd_1.o'.
+Note: source file '.\Board\GLCD\HzLib.c' - object file renamed from '.\Objects\HzLib.o' to '.\Objects\hzlib_1.o'.
+compiling algorithm.c...
+algorithm.c(33): warning:  #1-D: last line of file ends without a newline
+  //}
+algorithm.c: 1 warning, 0 errors
+compiling main.c...
+Board/adc/adc.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif 
+Board/button_EXINT/button.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif
+.\Software\user\configuration_os\os_cfg.h(87): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 51 of ".\Software\user\configuration_os\app_cfg.h")
+  #define OS_CFG_TASK_DEL_EN              0u   /* Include code for OSTaskDel()                                          */
+.\Software\user\configuration_os\os_cfg.h(102): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 52 of ".\Software\user\configuration_os\app_cfg.h")
+  #define OS_CFG_TMR_EN                   0u   /* Enable (1) or Disable (0) code generation for TIMERS                  */
+main.c(108): warning:  #223-D: function "OSTmrCreate" declared implicitly
+  		OSTmrCreate(&WLTmr,         				/* p_tmr          */
+main.c(172): warning:  #177-D: variable "os_err"  was declared but never referenced
+  		OS_ERR  os_err;
+main.c(173): warning:  #177-D: variable "err"  was declared but never referenced
+  		OS_ERR err;
+main.c(174): warning:  #177-D: variable "status"  was declared but never referenced
+  		CPU_BOOLEAN  status;
+main.c(236): warning:  #177-D: variable "err"  was declared but never referenced
+  	OS_ERR err;
+main.c(257): warning:  #177-D: variable "err"  was declared but never referenced
+  	OS_ERR err;
+main.c(28): warning:  #177-D: variable "DRAIN_TCB"  was declared but never referenced
+  static	OS_TCB				DRAIN_TCB;
+main.c(29): warning:  #177-D: variable "FILL_TCB"  was declared but never referenced
+  static  OS_TCB				FILL_TCB;
+main.c(31): warning:  #177-D: variable "DISPLAY_TCB"  was declared but never referenced
+  static  OS_TCB				DISPLAY_TCB; //Handles all display on screen
+main.c(39): warning:  #177-D: variable "DRAIN_STACK"  was declared but never referenced
+  static  CPU_STK_SIZE	DRAIN_STACK[APP_CFG_TASK_STK_SIZE];
+main.c(40): warning:  #177-D: variable "FILL_STACK"  was declared but never referenced
+  static  CPU_STK_SIZE	FILL_STACK[APP_CFG_TASK_STK_SIZE];
+main.c(42): warning:  #177-D: variable "UPDATE_DISPLAY_TCB"  was declared but never referenced
+  static  CPU_STK_SIZE	UPDATE_DISPLAY_TCB[APP_CFG_TASK_STK_SIZE];
+main.c(49): warning:  #177-D: variable "max_WL"  was declared but never referenced
+  static int max_WL = 200; //Define absolute max water level of tank (Liters)
+main.c(50): warning:  #177-D: variable "alert_WL"  was declared but never referenced
+  static int alert_WL = 180;  //What WL should give alert.
+main.c(64): warning:  #177-D: function "App_ObjCreate"  was declared but never referenced
+  static void App_ObjCreate  (void);
+main.c(146): warning:  #177-D: function "tostring"  was declared but never referenced
+  static int   tostring( uint8_t * str, int num ){
+main.c(66): warning:  #177-D: function "App_TaskCreate"  was declared but never referenced
+  static void App_TaskCreate(void);
+main.c(265): warning:  #177-D: function "FILL"  was declared but never referenced
+  void FILL (void *p_arg){ //Sets level to fill between 0 and 3 - called every 1s when reading new value (as long as WL <180
+main.c(271): warning:  #177-D: function "DRAIN"  was declared but never referenced
+  void DRAIN (void *p_arg){ //Starts draining!
+main.c: 23 warnings, 0 errors
+linking...
+Program Size: Code=27852 RO-data=2316 RW-data=424 ZI-data=32412  
+".\Objects\os_micrium_landtiger.axf" - 0 Error(s), 24 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.LPC1700_DFP.2.7.1.pack
+                Keil.LPC1700_DFP.2.7.1
+                NXP LPC1700 Series Device Support, Drivers and Examples for MCB1700 and LPC1788-32
+   * Component: GPIO Version: 1.1.0
+   * Component: PIN Version: 1.0.0
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/LPC1768
+  ./RTE/_Target_1
+  C:/Users/stefano/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/stefano/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.1/Device/Include
+  C:/Users/stefano/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.1/RTE_Driver
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:GPIO:1.1.0
+      Source file:   RTE_Driver/GPIO_LPC17xx.c
+      Include file:  RTE_Driver/GPIO_LPC17xx.h
+
+   * Component: Keil::Device:PIN:1.0.0
+      Include file:  RTE_Driver/PIN_LPC17xx.h
+      Source file:   RTE_Driver/PIN_LPC17xx.c
+
+   * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device/Source/ARM/startup_LPC17xx.s
+      Source file:   Device/Source/system_LPC17xx.c
+      Include file:  RTE_Driver/Config/RTE_Device.h
+      Include file:  Device/Include/LPC17xx.h
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

@@ -21,7 +21,7 @@ Target DLL:      UL2CM3.DLL V1.164.7.0
 Dialog DLL:      TARMP1.DLL V1.27.1.0
  
 <h2>Project:</h2>
-C:\Users\stefano\Documents\micrium\micriumlab1\os_micrium_landtiger.uvprojx
+Z:\EmbeddedOS\micriumlab1\os_micrium_landtiger.uvprojx
 Project File Date:  11/21/2022
 
 <h2>Output:</h2>
@@ -31,98 +31,339 @@ Note: source file '.\Board\GLCD\AsciiLib.c' - object file renamed from '.\Object
 Note: source file '.\Board\GLCD\GLCD.c' - object file renamed from '.\Objects\GLCD.o' to '.\Objects\glcd_1.o'.
 Note: source file '.\Board\GLCD\HzLib.c' - object file renamed from '.\Objects\HzLib.o' to '.\Objects\hzlib_1.o'.
 compiling bsp_os.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\user\BSP\bsp_os.c: 2 warnings, 0 errors
 compiling main.c...
 Board/adc/adc.h(12): warning:  #1-D: last line of file ends without a newline
   #endif 
-Board/button_EXINT/button.h(11): warning:  #1-D: last line of file ends without a newline
+Board/button_EXINT/button.h(12): warning:  #1-D: last line of file ends without a newline
   #endif
-main.c(25): warning:  #177-D: variable "GUI_TSK_TCB"  was declared but never referenced
-  static	OS_TCB			  GUI_TSK_TCB;
-main.c(26): warning:  #177-D: variable "INPUT_TSK_TCB"  was declared but never referenced
-  static	OS_TCB				INPUT_TSK_TCB;
-main.c(30): warning:  #177-D: variable "GUI_TSK_STACK"  was declared but never referenced
-  static	CPU_STK_SIZE	GUI_TSK_STACK[APP_CFG_TASK_STK_SIZE];
-main.c(31): warning:  #177-D: variable "INPUT_TSK_STACK"  was declared but never referenced
-  static  CPU_STK_SIZE	INPUT_TSK_STACK[APP_CFG_TASK_STK_SIZE];
-main.c(48): warning:  #177-D: function "App_ObjCreate"  was declared but never referenced
-  static void App_ObjCreate  (void);
-main.c(50): warning:  #177-D: function "App_TaskCreate"  was declared but never referenced
-  static void App_TaskCreate(void);
-main.c: 8 warnings, 0 errors
+.\Software\user\configuration_os\os_cfg.h(87): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 51 of ".\Software\user\configuration_os\app_cfg.h")
+  #define OS_CFG_TASK_DEL_EN              0u   /* Include code for OSTaskDel()                                          */
+.\Software\user\configuration_os\os_cfg.h(102): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 52 of ".\Software\user\configuration_os\app_cfg.h")
+  #define OS_CFG_TMR_EN                   0u   /* Enable (1) or Disable (0) code generation for TIMERS                  */
+main.c(93): warning:  #223-D: function "OSTmrCreate" declared implicitly
+  		OSTmrCreate(&Task1Tmr,         				/* p_tmr          */
+main.c(178): warning:  #223-D: function "OSTmrStart" declared implicitly
+  							OSTmrStart(&Task1Tmr, &err);
+main.c(190): warning:  #223-D: function "OSTmrStop" declared implicitly
+  						OSTmrStop(&Task1Tmr,
+main.c(201): warning:  #223-D: function "OSTmrStop" declared implicitly
+  						OSTmrStop(&Task2Tmr,
+main.c(157): warning:  #177-D: variable "os_err"  was declared but never referenced
+  		OS_ERR  os_err;
+main.c(159): warning:  #177-D: variable "status"  was declared but never referenced
+  		CPU_BOOLEAN  status;
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): warning:  #144-D: a value of type "char *" cannot be used to initialize an entity of type "char"
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c(253): error:  #69: integer conversion resulted in truncation
+  char message[79] = {"T","h","e"," ","A","n","s","w","e","r"," ","t","o"," ","t","h","e"," ","U","l","t","i","m","a","t","e"," ","Q","u","e","s","t","i","o","n"," ","o","f"," ","L","i","f","e"," ","t","h","e"," ","U","n","i","v","e","r","s","e",","," ","a","n","d"," ","E","v","e","r","y","t","h","i","n","g","i","s"," ","4","2"};
+main.c: 40 warnings, 30 errors
 compiling bsp.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\user\BSP\bsp.c: 2 warnings, 0 errors
 compiling app_hooks.c...
 Software\user\configuration_os\./../../../Board/adc/adc.h(12): warning:  #1-D: last line of file ends without a newline
   #endif 
-Software\user\configuration_os\./../../../Board/button_EXINT/button.h(11): warning:  #1-D: last line of file ends without a newline
+Software\user\configuration_os\./../../../Board/button_EXINT/button.h(12): warning:  #1-D: last line of file ends without a newline
   #endif
-Software\user\configuration_os\app_hooks.c: 2 warnings, 0 errors
+.\Software\user\configuration_os\os_cfg.h(87): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 51 of ".\Software\user\configuration_os\app_cfg.h")
+  #define OS_CFG_TASK_DEL_EN              0u   /* Include code for OSTaskDel()                                          */
+.\Software\user\configuration_os\os_cfg.h(102): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 52 of ".\Software\user\configuration_os\app_cfg.h")
+  #define OS_CFG_TMR_EN                   0u   /* Enable (1) or Disable (0) code generation for TIMERS                  */
+Software\user\configuration_os\app_hooks.c: 4 warnings, 0 errors
 assembling cpu_a.s...
 compiling os_app_hooks.c...
-compiling csp.c...
-compiling cpu_core.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\user\configuration_os\os_app_hooks.c: 2 warnings, 0 errors
 compiling cpu_c.c...
+compiling cpu_core.c...
+compiling csp.c...
+compiling csp_gpio.c...
 compiling csp_int.c...
 compiling csp_pm.c...
-compiling csp_gpio.c...
-assembling lib_mem_a.asm...
 compiling lib_ascii.c...
 compiling csp_tmr.c...
+assembling lib_mem_a.asm...
 compiling lib_math.c...
-compiling lib_mem.c...
 compiling lib_str.c...
+compiling lib_mem.c...
 compiling os_cfg_app.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_cfg_app.c: 2 warnings, 0 errors
 compiling os_dbg.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_dbg.c: 2 warnings, 0 errors
 compiling os_core.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_core.c: 2 warnings, 0 errors
 compiling os_flag.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_flag.c: 2 warnings, 0 errors
 compiling os_int.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_int.c: 2 warnings, 0 errors
 compiling os_mem.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_mem.c: 2 warnings, 0 errors
 compiling os_msg.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_msg.c: 2 warnings, 0 errors
 compiling os_mutex.c...
-compiling os_prio.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_mutex.c: 2 warnings, 0 errors
 compiling os_pend_multi.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_pend_multi.c: 2 warnings, 0 errors
+compiling os_prio.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_prio.c: 2 warnings, 0 errors
 compiling os_q.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_q.c: 2 warnings, 0 errors
 compiling os_stat.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_stat.c: 2 warnings, 0 errors
 compiling os_sem.c...
-compiling os_task.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_sem.c: 2 warnings, 0 errors
 compiling os_tick.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_tick.c: 2 warnings, 0 errors
 compiling os_time.c...
-compiling os_tmr.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_time.c: 2 warnings, 0 errors
+compiling os_task.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_task.c: 2 warnings, 0 errors
 compiling os_var.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_var.c: 2 warnings, 0 errors
+compiling os_tmr.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_tmr.c: 2 warnings, 0 errors
 compiling os_csp.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Ports\ARM-Cortex-M3\CSP\os_csp.c: 2 warnings, 0 errors
 assembling os_cpu_a.s...
 compiling os_cpu_c.c...
-compiling lib_adc.c...
-Board\adc\./adc.h(12): warning:  #1-D: last line of file ends without a newline
-  #endif 
-Board\adc\lib_adc.c: 1 warning, 0 errors
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Ports\ARM-Cortex-M3\Generic\os_cpu_c.c: 2 warnings, 0 errors
 compiling IRQ_adc.c...
 Board\adc\./adc.h(12): warning:  #1-D: last line of file ends without a newline
   #endif 
 Board\adc\IRQ_adc.c: 1 warning, 0 errors
+compiling lib_adc.c...
+Board\adc\./adc.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif 
+Board\adc\lib_adc.c: 1 warning, 0 errors
 compiling AsciiLib.c...
 compiling funct_joystick.c...
 compiling lib_joystick.c...
 compiling HzLib.c...
-compiling funct_led.c...
 compiling lib_led.c...
-compiling IRQ_timer.c...
+compiling funct_led.c...
 compiling lib_timer.c...
-compiling IRQ_button.c...
-Board\button_EXINT\button.h(11): warning:  #1-D: last line of file ends without a newline
-  #endif
-Board\button_EXINT\IRQ_button.c: 1 warning, 0 errors
+compiling IRQ_timer.c...
+compiling GLCD.c...
 compiling lib_button.c...
-Board\button_EXINT\button.h(11): warning:  #1-D: last line of file ends without a newline
+Board\button_EXINT\button.h(12): warning:  #1-D: last line of file ends without a newline
   #endif
 Board\button_EXINT\lib_button.c: 1 warning, 0 errors
-compiling GLCD.c...
-compiling GPIO_LPC17xx.c...
+compiling IRQ_button.c...
+Board\button_EXINT\button.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif
+Board\button_EXINT\IRQ_button.c: 1 warning, 0 errors
 assembling startup_LPC17xx.s...
+compiling GPIO_LPC17xx.c...
 compiling PIN_LPC17xx.c...
 compiling system_LPC17xx.c...
-linking...
-Program Size: Code=26056 RO-data=2300 RW-data=348 ZI-data=29500  
-".\Objects\os_micrium_landtiger.axf" - 0 Error(s), 14 Warning(s).
+".\Objects\os_micrium_landtiger.axf" - 30 Error(s), 94 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -152,8 +393,8 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:GPIO:1.1.0
-      Source file:   RTE_Driver/GPIO_LPC17xx.c
       Include file:  RTE_Driver/GPIO_LPC17xx.h
+      Source file:   RTE_Driver/GPIO_LPC17xx.c
 
    * Component: Keil::Device:PIN:1.0.0
       Include file:  RTE_Driver/PIN_LPC17xx.h
@@ -162,9 +403,10 @@ Package Vendor: Keil
    * Component: Keil::Device:Startup:1.0.0
       Include file:  RTE_Driver/Config/RTE_Device.h
       Source file:   Device/Source/ARM/startup_LPC17xx.s
-      Include file:  Device/Include/LPC17xx.h
       Source file:   Device/Source/system_LPC17xx.c
-Build Time Elapsed:  00:00:05
+      Include file:  Device/Include/LPC17xx.h
+Target not created.
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
