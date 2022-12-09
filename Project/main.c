@@ -14,21 +14,20 @@
 #include "RTE_Device.h"                 // Keil::Device:Startup
 #include "includes.h"
 #include "BSP.h"
+#include <stdlib.h>
+#include <time.h>
 
-int down_KEY1;
-int down_KEY2;
-int down_KEY3;
-int down_KEY4;
-unsigned short AD_current; 
+short down_KEY1;
+short down_KEY2;
+short down_KEY3;
      /* ----------------- APPLICATION GLOBALS ------------------ */
 
 /* Definition of the Task Control Blocks for all tasks */
 static  OS_TCB        APP_TSK_TCB;
 static	OS_TCB			  READ_WL_TCB; //Task for reading waterlevel
-static	OS_TCB				DRAIN_TCB;
-static  OS_TCB				FILL_TCB;
+//static	OS_TCB				DRAIN_TCB;
+//static  OS_TCB				FILL_TCB;
 static  OS_TCB        OUTPUT_TCB;
-static  OS_TCB				DISPLAY_TCB; //Handles all display on screen
 
 static OS_TMR  WLTmr; //Waterlevel timer
 static OS_TMR  OUTPUTTmr; //Random output timer
@@ -36,20 +35,20 @@ static OS_TMR  OUTPUTTmr; //Random output timer
 /* Definition of the Stacks for three tasks */
 static  CPU_STK_SIZE  APP_TSK_STACK[APP_CFG_TASK_STK_SIZE];
 static	CPU_STK_SIZE	READ_WL_STACK[APP_CFG_TASK_STK_SIZE];
-static  CPU_STK_SIZE	DRAIN_STACK[APP_CFG_TASK_STK_SIZE];
-static  CPU_STK_SIZE	FILL_STACK[APP_CFG_TASK_STK_SIZE];
+//static  CPU_STK_SIZE	DRAIN_STACK[APP_CFG_TASK_STK_SIZE];
+//static  CPU_STK_SIZE	FILL_STACK[APP_CFG_TASK_STK_SIZE];
 static  CPU_STK_SIZE	OUTPUT_STACK[APP_CFG_TASK_STK_SIZE];
-static  CPU_STK_SIZE	UPDATE_DISPLAY_TCB[APP_CFG_TASK_STK_SIZE];
 
 
 /* Global Variables*/
 uint16_t position = 0;
 uint16_t counter = 0;
+int s = 0;
 
-static int max_WL = 200; //Define absolute max water level of tank (Liters)
-static int alert_WL = 180;  //What WL should give alert.
-double WL = 150; //Start water level at 150L - actual water level
-int WL_r = 0; //Read water level
+static short max_WL = 200; //Define absolute max water level of tank (Liters)
+static short alert_WL = 180;  //What WL should give alert.
+double WL = 200; //Start water level at 150L - actual water level
+unsigned char WL_r = 0; //Read water level
 
 OS_SEM sem_counter;
 OS_SEM sem_position;
@@ -61,15 +60,16 @@ OS_SEM sem_position;
 */
 
 /* Generic function */
-static void App_ObjCreate  (void);
 static int tostring( uint8_t * str, int num );
+static void App_ObjCreate  (void);
 static void App_TaskCreate(void);
+
 
 /* Task functions */
 static void APP_TSK ( void   *p_arg );
 static void READ_WL ( void * p_args );
-static void FILL ( void * p_args );
-static void DRAIN ( void * p_args );
+//static void FILL ( void * p_args );
+//static void DRAIN ( void * p_args );
 static void OUTPUT (void * p_args );
 
 static void WLTmr_callback ( OS_TMR  *p_tmr, void * p_args );
@@ -100,10 +100,11 @@ int  main (void)
 		CPU_IntDis(); 					/*disable interrupt*/
     CPU_Init();   					/*init cpu*/
     Mem_Init();							/*Memory initialization*/
+		
 
     OSInit(&err);						/* Initialize "uC/OS-III, The Real-Time Kernel"         */
 		
-	
+		LCD_Clear(White);
 	
 		OSTmrCreate(&WLTmr,         				/* p_tmr          */
 									 "Water_level_timer",           	   /* p_name         */
@@ -136,35 +137,13 @@ int  main (void)
                  (void       *) 0,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  (OS_ERR     *)&err);
-
+		
 		OSStart(&err);      /* Start multitasking (i.e. give control to uC/OS-III). */
-
+		LCD_Clear(White);
+		
     while(DEF_ON){			/* Should Never Get Here	*/
     };
 }
-
-static int   tostring( uint8_t * str, int num ){
-    int i, rem, len = 0, n;
-		// handling the case 0
-		if(num==0){
-		str[0]='0';
-			str[1]='\0';
-			return 1;
-		}
-    n = num;
-    while (n != 0)
-    {
-        len++;
-        n /= 10;
-    }
-    for (i = 0; i < len; i++)
-    {   rem = num % 10;
-        num = num / 10;
-        str[len-(i+1)] = rem + '0';
-    }
-		str[len]='\0';
-		return len-1;
-    }
 
 static  void  APP_TSK (void *p_arg)
 {
@@ -172,20 +151,46 @@ static  void  APP_TSK (void *p_arg)
 		OS_ERR  os_err;
 		OS_ERR err;
 		CPU_BOOLEAN  status;
-	
-		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
-		LED_init(); 
-		LCD_Initialization();
-		
-		ADC_init();
-		joystick_init();
-		
-	
-		BUTTON_init();
-	
 		LCD_Clear(Blue);
+		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
+		LCD_Initialization();
+		joystick_init();
+	
+		srand(time(NULL));
+		BUTTON_init();
+		LCD_Clear(White);
+		
+	  LCD_DrawLine(0, 119, 100, 119, Black);
+	  LCD_DrawLine(100, 120, 100, 320, Black);
+		GUI_Text( 10, 100, "Water tank", Black, White);
+		int i=0;
+		while (i<WL){
+			int level = 320-i;
+			LCD_DrawLine(0, level, 99, level, Blue);
+			//LCD_DrawLine(140, level, 240, level, Blue);
+			i=i+1;
+		}
+		
+		OSTmrStart(&WLTmr, &err);
+		OSTmrStart(&OUTPUTTmr, &err);
+	  
 		while (DEF_TRUE) {
-			;;
+			if (down_KEY1 == 1) {
+					int bit_pos = rand() % 32;
+					 s ^= (1 << bit_pos); //Flips bit in sensor read (May introduce timing faults
+					down_KEY1 = 0;
+			}
+			if (down_KEY2 == 1) {
+					unsigned char bit_pos = rand() % 8;
+					WL_r ^= (1 << bit_pos); //Flips bit in read value
+					down_KEY2 = 0;
+			}
+			if (down_KEY3 == 1) { //Flips random memory adress ? (Made by ChatGTP)
+					int bit_pos = rand() %8;
+					int *addr = (int *)rand();
+					*addr ^= 1 << bit_pos;
+					down_KEY3 = 0;
+			}
 		}		
 		
 }
@@ -227,49 +232,98 @@ void OutputTmr_callback(OS_TMR  *p_tmr,
                  (OS_ERR     *)&err);
 }
 										 
-
+long outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
+uint8_t * val1[16];
 
 void READ_WL (void *p_arg) //Reads water level and creates task
 {
-	
 	(void)p_arg;
+	unsigned char WL_old = WL_r;
+	//OSTmrStart()
+	
 	OS_ERR err;
-	GUI_Text(50, 50,  "t" ,White, Blue);
-	
-	WL_r = 0;
-	while (WL_r < WL){ //Here we can flip random bit so that deadline is missed!
-		WL_r = WL_r +1;
+	//WL_r = (int)WL;
+	s = 0;
+	while(s < WL){
+		WL_r = s;
+		s= s+1;
 	}
+	tostring((uint8_t*) val1, WL_r);
+	GUI_Text( 50, 20, "Read value:", Black, White);
+	GUI_Text( 150, 20, (uint8_t *) val1, Black, White);
 	
-	//Here is a good place to insert a bit error. So that we read WL > 180 even though it is not <= empty tank!
+	
 	if(WL_r>180){
-		//Activate DRAIN and stop FILL
+		fill=0;	
+    drain = 3;
 	} else {
-		//Fill!
+		drain = 0;
+		fill = 1+ outW*2-WL_r/100;
 	}
 }
 
 
 
-double outW, drain, fill = 0; //in L
+
 void OUTPUT (void *p_arg) //Drains random amount between 0 and 1L every 1/th of a second
 {
 	(void)p_arg;
 	OS_ERR err;
-	//Find random number between 0 and 1
-	//Reduce WaterLevel by random number
-	
-	WL = WL - outW - drain + fill; 
+
+  // Store the current value of WL in a variable
+  double WL_old = WL;
+
+  // Generate a random value between 0 and 1.5 and assign it to outW
+  outW = (double)(rand() % 1500) / 1000;
+
+  // Update the value of WL based on the values of outW, drain, and fill
+  WL = WL - outW - drain + fill;
+
+  // Display the updated value of WL on the screen
+  GUI_Text(50, 50, "Act", White, Blue);
+  GUI_Text(150, 50, (uint8_t*)val1, White, Blue);
+  tostring(&val1, WL);
+
+  // Ensure that WL never goes below 0
+  if (WL < 0) {
+    WL = 0;
+  }
+
+  // If the value of WL has increased, draw blue lines on the screen
+  if (WL_old < WL) {
+    for (int i = WL_old; i < WL; i++) {
+      int level = 320 - i;
+      LCD_DrawLine(0, level, 99, level, Blue);
+    }
+  }
+  // If the value of WL has decreased, draw white lines on the screen
+  else if (WL_old > WL) {
+    for (int i = WL_old; i > WL; i--) {
+      int level = 320 - i;
+      LCD_DrawLine(0, level, 99, level, White);
+    }
+  }
 }
 
-
-void FILL (void *p_arg){ //Sets level to fill between 0 and 3 - called every 1s when reading new value (as long as WL <180
-	drain = 0;
-	
-	fill = 1+ outW*2-WL_r/100; //Try to inteligently fill (predicting what the water level will be for the next 1s) to stay within 50 to 150L. 
-}
-
-void DRAIN (void *p_arg){ //Starts draining!
-	fill=0;	
-	drain = 3;
-}
+static int   tostring( uint8_t * str, int num ){
+    int i, rem, len = 0, n;
+		// handling the case 0
+		if(num==0){
+		str[0]='0';
+			str[1]='\0';
+			return 1;
+		}
+    n = num;
+    while (n != 0)
+    {
+        len++;
+        n /= 10;
+    }
+    for (i = 0; i < len; i++)
+    {   rem = num % 10;
+        num = num / 10;
+        str[len-(i+1)] = rem + '0';
+    }
+		str[len]='\0';
+		return len-1;
+    }

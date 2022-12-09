@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -371,7 +371,7 @@
             <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x10000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>.\Objects\os_micrium_landtiger.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -398,6 +398,11 @@
               <FileName>algorithm.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\algorithm.c</FilePath>
+            </File>
+            <File>
+              <FileName>demo main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\demo main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -755,16 +760,6 @@
           <GroupName>Board Support</GroupName>
           <Files>
             <File>
-              <FileName>IRQ_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Board\adc\IRQ_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Board\adc\lib_adc.c</FilePath>
-            </File>
-            <File>
               <FileName>AsciiLib.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Board\GLCD\AsciiLib.c</FilePath>
@@ -808,11 +803,6 @@
               <FileName>lib_timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Board\timer\lib_timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>adc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Board\adc\adc.h</FilePath>
             </File>
             <File>
               <FileName>AsciiLib.h</FileName>

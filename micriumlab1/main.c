@@ -37,7 +37,8 @@ static  CPU_STK_SIZE	TASK_2_STACK[APP_CFG_TASK_STK_SIZE];
 /* Global Variables*/
 uint16_t position = 0;
 uint16_t counter = 0;
-
+int pos_x = 0;
+int pos_y = 0;
 
 OS_SEM sem_counter;
 OS_SEM sem_position;
@@ -125,6 +126,7 @@ int  main (void)
 		OSStart(&err);      /* Start multitasking (i.e. give control to uC/OS-III). */
 
     while(DEF_ON){			/* Should Never Get Here	*/
+							
     };
 }
 
@@ -206,6 +208,30 @@ static  void  APP_TSK (void *p_arg)
 						down_KEY3 =0;
 						
 					}
+					
+						if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){
+							pos_y = pos_y-1;
+							LCD_Clear(Blue);
+						 PutChar(pos_x, pos_y, (char) "0" ,White, Blue);
+
+					}		
+					else if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joytick down pulled */
+						LCD_Clear(Blue);
+							pos_y = pos_y +1;
+						 PutChar(pos_x, pos_y, (char) "0" ,White, Blue);
+					}
+
+					else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joytick right pulled */
+						LCD_Clear(Blue);
+							pos_x = pos_x -1;
+						 PutChar(pos_x, pos_y, (char) "0" ,White, Blue);
+					}
+
+					else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right pulled */
+						LCD_Clear(Blue);
+							pos_x = pos_x +1;
+						 PutChar(pos_x, pos_y, (char) "0" ,White, Blue);
+					}
 		}
 		
 }
@@ -260,8 +286,9 @@ void TASK_1 (void *p_arg)
 	i=(i+1)%80;
 	char disp=message[i];
 	tostring((uint8_t*) val1, message[i]);
-	GUI_Text(50, 50,  "t" ,White, Blue);
-	GUI_Text(50,70, (uint8_t *) val1, White, Blue);
+	//GUI_Text(50, 50,  "t" ,White, Blue);
+	LCD_Clear(Blue);
+	PutChar(50,70, (uint8_t *) disp, White, Blue);
 	OSTaskDel((OS_TCB *)0, &err);
 }
 int led_position=0x01;

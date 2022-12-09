@@ -96,7 +96,6 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     EINT1_IRQHandler          ; 35: External Interrupt 1
                 DCD     EINT2_IRQHandler          ; 36: External Interrupt 2
                 DCD     EINT3_IRQHandler          ; 37: External Interrupt 3
-                DCD     ADC_IRQHandler            ; 38: A/D Converter
                 DCD     BOD_IRQHandler            ; 39: Brown-Out Detect
                 DCD     USB_IRQHandler            ; 40: USB
                 DCD     CAN_IRQHandler            ; 41: CAN
@@ -206,7 +205,6 @@ Default_Handler PROC
                 EXPORT  EINT1_IRQHandler          [WEAK]
                 EXPORT  EINT2_IRQHandler          [WEAK]
                 EXPORT  EINT3_IRQHandler          [WEAK]
-                EXPORT  ADC_IRQHandler            [WEAK]
                 EXPORT  BOD_IRQHandler            [WEAK]
                 EXPORT  USB_IRQHandler            [WEAK]
                 EXPORT  CAN_IRQHandler            [WEAK]
@@ -242,7 +240,6 @@ EINT0_IRQHandler
 EINT1_IRQHandler
 EINT2_IRQHandler
 EINT3_IRQHandler
-ADC_IRQHandler
 BOD_IRQHandler
 USB_IRQHandler
 CAN_IRQHandler

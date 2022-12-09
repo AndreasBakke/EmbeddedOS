@@ -40,3 +40,4 @@
 .\objects\main.o: .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic\os_cpu.h
 .\objects\main.o: .\Software\user\BSP\BSP.h
 .\objects\main.o: .\Software\user\BSP\bsp_os.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCLAN5\Bin\..\include\time.h
