@@ -25,19 +25,16 @@ short down_KEY3;
 /* Definition of the Task Control Blocks for all tasks */
 static  OS_TCB        APP_TSK_TCB;
 static	OS_TCB			  READ_WL_TCB; //Task for reading waterlevel
-//static	OS_TCB				DRAIN_TCB;
-//static  OS_TCB				FILL_TCB;
-static  OS_TCB        OUTPUT_TCB;
+static  OS_TCB        OUTPUT_TCB;  //"Analog" task
 
 static OS_TMR  WLTmr; //Waterlevel timer
 static OS_TMR  OUTPUTTmr; //Random output timer
 
-/* Definition of the Stacks for three tasks */
+/* Definition of the Stacks for tasks */
 static  CPU_STK_SIZE  APP_TSK_STACK[APP_CFG_TASK_STK_SIZE];
 static	CPU_STK_SIZE	READ_WL_STACK[APP_CFG_TASK_STK_SIZE];
-//static  CPU_STK_SIZE	DRAIN_STACK[APP_CFG_TASK_STK_SIZE];
-//static  CPU_STK_SIZE	FILL_STACK[APP_CFG_TASK_STK_SIZE];
 static  CPU_STK_SIZE	OUTPUT_STACK[APP_CFG_TASK_STK_SIZE];
+
 
 
 /* Global Variables*/
@@ -105,6 +102,19 @@ int  main (void)
 		
 		LCD_Clear(White);
 	
+	
+		/*
+	
+	
+			Here you can implement timers!
+		
+	
+		*/
+	
+	
+	
+	
+		//Create timer to calculate waterlevel which fires every 1s
 		OSTmrCreate(&WLTmr,         				/* p_tmr          */
 									 "Water_level_timer",           	   /* p_name         */
 										10,                    /* dly            */
@@ -113,7 +123,9 @@ int  main (void)
 										WLTmr_callback,				 /* p_callback     */
 										0,                     /* p_callback_arg */
 									 &err); 
-									 
+		
+		
+		//Create timer to simulate analog system every 100ms						 
 		OSTmrCreate(&OUTPUTTmr,         				/* p_tmr          */
 									 "OutputWater_timer",           	   /* p_name         */
 										10,                    /* dly            */
@@ -149,11 +161,12 @@ static  void  APP_TSK (void *p_arg)
 		OS_ERR err;
 		CPU_BOOLEAN  status;
 		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
-		LCD_Initialization();
+		LCD_Initialization(); //Init LCD OBS: Update GLCD.c if using LAB board.
 		joystick_init();
 		BUTTON_init();
-		LCD_Clear(White);
 		
+	
+		LCD_Clear(White);	
 		//Draw initial watertank and static elements
 	  LCD_DrawLine(0, 119, 100, 119, Black);
 	  LCD_DrawLine(100, 120, 100, 320, Black);
@@ -172,60 +185,46 @@ static  void  APP_TSK (void *p_arg)
 		OSTmrStart(&OUTPUTTmr, &err);
 	  
 		while (DEF_TRUE) {
-			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up
-				int bit_pos = rand() % 16;
-				s ^= (1 << bit_pos); //Flips bit in sensor read (May introduce timing fault)
-				tostring((uint8_t*) val1, s);
-				GUI_Text(0,0,val1, Black, White);
+			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up -- flips random bit in "sensor initialization"
+				if (s==0){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
+					int bit_pos = rand() % 16;
+					s ^= (1 << bit_pos); //Flips bit in sensor initialization (May introduce timing fault)
+					tostring((uint8_t*) val1, s);
+					GUI_Text(0,0,val1, Black, White);
+				}
 			}
 			else
-				if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joystick down  */
+				if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joystick down --does nothing  */
 				//GUI_Text(0,0,"D", Black, White);
 				//unsigned char bit_pos = rand() % 8;
 				//WL_r ^= (1 << bit_pos); //Flips bit in read value
 			}
 
-			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left */
+			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left - flips random bit in drain */
 				//GUI_Text(0,0,"L", Black, White);
 				unsigned char bit_pos = rand() %4;
 				drain ^=(1 << bit_pos);
 				//Flip Drain
 			}
 
-			else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right  */
+			else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right - flips random bit in fill  */
 				unsigned char bit_pos = rand() %4;
 				fill ^=(1 << bit_pos);
-				//int bit_pos = rand() %32;
-				//int *addr = (int *)rand();
-				//*addr ^= 1 << bit_pos;
-				//GUI_Text(0,0,"R", Black, White);
-				//unsigned char bit_pos = rand() %8;
-				//drain ^=(1 << bit_pos);
-				//flip drain
 			}
-			/*if (down_KEY2 == 1) {
-					unsigned char bit_pos = rand() % 8;
-					WL_r ^= (1 << bit_pos); //Flips bit in read value
-					down_KEY2 = 0;
-			}
-			if (down_KEY3 == 1) { //Flips random memory adress ? (Made by ChatGTP)
-					int bit_pos = rand() %8;
-					int *addr = (int *)rand();
-					*addr ^= 1 << bit_pos;
-				
-				
-				//Memory address 1 start: 0x10000000
-				// Size: 0x8000
-				
-				//Mem 2: 0x2007C000
-				//Size 0x8000
-					down_KEY3 = 0;
-			}*/
 		}		
 		
 }
 
 
+/*
+
+    Here you can implement callback functions for your timers!
+
+*/
+
+
+
+//Callback function for the WL timer
 void WLTmr_callback(OS_TMR  *p_tmr,
                      void    *p_arg){
 	OS_ERR err;
@@ -243,7 +242,9 @@ void WLTmr_callback(OS_TMR  *p_tmr,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  (OS_ERR     *)&err);
 }
-										 
+
+
+//Callback function for the analog-timer
 void OutputTmr_callback(OS_TMR  *p_tmr,
                      void    *p_arg){
 	OS_ERR err;
@@ -268,16 +269,30 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 {
 	(void)p_arg;
 	OS_ERR err;
+	
+	/*
+	TODO: Implement one or more acceptance test with basis in the task description and theory
+	*/
+	
+	
 	while(s < WL){ //Simulate reading sensor
-		WL_r = s;
 		s= s+1;
 	}
+	WL_r = s;
 	s=0;
-	tostring((uint8_t*) val1, WL_r);
+	 
 	
+	
+	
+	
+	
+	//Display read Water level
+	tostring((uint8_t*) val1, WL_r);
+	GUI_Text( 150, 20, "   ", Black, White);
 	GUI_Text( 150, 20, (uint8_t *) val1, Black, White);
 	
 	
+	//Decide what to do based on water level
 	if(WL_r>180){
 		fill=0;	
     drain = 3;
@@ -290,7 +305,9 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 
 
 
-void OUTPUT (void *p_arg) //Drains random amount between 0 and 1L every 1/th of a second
+//Simulates "analog system". Draining water, and displaying what the actual WL is.
+//Do not touch, but feel free to read.
+void OUTPUT (void *p_arg)
 {
 
 	(void)p_arg;
@@ -306,15 +323,16 @@ void OUTPUT (void *p_arg) //Drains random amount between 0 and 1L every 1/th of 
   WL = WL - outW - drain + fill;
 	tostring(&val1, WL);
   // Display the updated value of WL on the screen
+	GUI_Text(150, 50, "   ", White, Blue);
   GUI_Text(150, 50, (uint8_t*)val1, White, Blue);
   
 
-  // Ensure that WL never goes below 0
-  if (WL < 0) {
+  // Ensure that WL never goes below 0 and display warning if it does.
+  if (WL <= 0) {
     WL = 0;
 		GUI_Text(110, 200, "TANK EMPTIED", White, Red);
   }
-	
+	//Display warning if WL > 200
 	else if (WL > 200) {
 		GUI_Text(110, 240, "TANK OVERFLOW", White, Red);
 	}
