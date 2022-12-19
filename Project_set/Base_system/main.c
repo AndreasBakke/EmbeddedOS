@@ -186,7 +186,7 @@ static  void  APP_TSK (void *p_arg)
 	  
 		while (DEF_TRUE) {
 			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up -- flips random bit in "sensor initialization"
-				if (s==200){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
+				if (s==200){ //Only flip bit once every second. Will be reset to 200 after read => new bit flip
 					int bit_pos = rand() % 32;
 					s ^= (1 << bit_pos); //Flips bit in sensor initialization (May introduce timing fault)
 					tostring((uint8_t*) val1, s);

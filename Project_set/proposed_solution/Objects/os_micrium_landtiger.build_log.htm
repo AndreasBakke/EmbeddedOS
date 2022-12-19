@@ -56,21 +56,19 @@ main.c(138): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is 
   										WLTmr_callback,				 /* p_callback     */
 main.c(149): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
   										OutputTmr_callback,				 /* p_callback     */
-main.c(188): warning:  #167-D: argument of type "int *" is incompatible with parameter of type "uint8_t *"
-  		GUI_Text( 10, 100, &s, Black, White);
 main.c(210): warning:  #167-D: argument of type "uint8_t **" is incompatible with parameter of type "uint8_t *"
   					GUI_Text(120,0,val1, Black, White);
 main.c(175): warning:  #177-D: variable "os_err"  was declared but never referenced
   		OS_ERR  os_err;
 main.c(177): warning:  #177-D: variable "status"  was declared but never referenced
   		CPU_BOOLEAN  status;
-main.c(307): warning:  #223-D: function "OSTaskDel" declared implicitly
+main.c(306): warning:  #223-D: function "OSTaskDel" declared implicitly
   	OSTaskDel(&READ_WL, &err);
-main.c(376): warning:  #167-D: argument of type "uint8_t *(*)[16]" is incompatible with parameter of type "uint8_t *"
+main.c(378): warning:  #167-D: argument of type "uint8_t *(*)[16]" is incompatible with parameter of type "uint8_t *"
   	tostring(&val1, WL);
-main.c(366): warning:  #177-D: variable "err"  was declared but never referenced
+main.c(368): warning:  #177-D: variable "err"  was declared but never referenced
   	OS_ERR err;
-main.c(429): warning:  #1-D: last line of file ends without a newline
+main.c(431): warning:  #1-D: last line of file ends without a newline
       }
 main.c(49): warning:  #177-D: variable "max_WL"  was declared but never referenced
   static short max_WL = 200; //Define absolute max water level of tank (Liters)
@@ -80,7 +78,7 @@ main.c(67): warning:  #177-D: function "App_ObjCreate"  was declared but never r
   static void App_ObjCreate  (void);
 main.c(68): warning:  #177-D: function "App_TaskCreate"  was declared but never referenced
   static void App_TaskCreate(void);
-main.c: 19 warnings, 0 errors
+main.c: 18 warnings, 0 errors
 compiling bsp.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
@@ -107,8 +105,8 @@ Software\user\configuration_os\os_app_hooks.c: 2 warnings, 0 errors
 compiling cpu_c.c...
 compiling cpu_core.c...
 compiling csp.c...
-compiling csp_gpio.c...
 compiling csp_int.c...
+compiling csp_gpio.c...
 compiling csp_pm.c...
 assembling lib_mem_a.asm...
 compiling lib_ascii.c...
@@ -182,30 +180,30 @@ compiling os_q.c...
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_q.c: 2 warnings, 0 errors
-compiling os_sem.c...
-.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TASK_DEL_EN 1
-.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TMR_EN 1
-Software\uCOS-III\Source\os_sem.c: 2 warnings, 0 errors
 compiling os_stat.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_stat.c: 2 warnings, 0 errors
-compiling os_task.c...
+compiling os_sem.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
-Software\uCOS-III\Source\os_task.c: 2 warnings, 0 errors
+Software\uCOS-III\Source\os_sem.c: 2 warnings, 0 errors
 compiling os_tick.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_tick.c: 2 warnings, 0 errors
+compiling os_task.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_task.c: 2 warnings, 0 errors
 compiling os_time.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
@@ -241,11 +239,11 @@ Software\uCOS-III\Ports\ARM-Cortex-M3\Generic\os_cpu_c.c: 2 warnings, 0 errors
 compiling funct_joystick.c...
 compiling HzLib.c...
 compiling lib_joystick.c...
-compiling funct_led.c...
 compiling GLCD.c...
+compiling funct_led.c...
 compiling lib_led.c...
-compiling IRQ_timer.c...
 compiling lib_timer.c...
+compiling IRQ_timer.c...
 compiling IRQ_button.c...
 Board\button_EXINT\button.h(12): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -261,9 +259,9 @@ compiling system_LPC17xx.c...
 linking...
 .\Objects\os_micrium_landtiger.axf: Warning: L6914W: option ropi ignored when using --scatter.
 .\Objects\os_micrium_landtiger.axf: Warning: L6914W: option rwpi ignored when using --scatter.
-Program Size: Code=26852 RO-data=2312 RW-data=400 ZI-data=31632  
+Program Size: Code=26852 RO-data=2312 RW-data=400 ZI-data=33688  
 Finished: 0 information, 2 warning and 0 error messages.
-".\Objects\os_micrium_landtiger.axf" - 0 Error(s), 74 Warning(s).
+".\Objects\os_micrium_landtiger.axf" - 0 Error(s), 73 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -305,7 +303,7 @@ Package Vendor: Keil
       Source file:   Device/Source/ARM/startup_LPC17xx.s
       Source file:   Device/Source/system_LPC17xx.c
       Include file:  RTE_Driver/Config/RTE_Device.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

@@ -121,7 +121,7 @@ int  main (void)
 		OSTmrCreate(&TTTmr,         				/* p_tmr          */
 										"Timing_test_timer",           	   /* p_name         */
 										0,                    /* dly            */
-										1,                    /* period =500ms       */
+										2,                    /* period =200ms       */
 										OS_OPT_TMR_ONE_SHOT,   /* opt            */
 										TTTmr_callback,				 /* p_callback     */
 										0,                     /* p_callback_arg */
@@ -185,7 +185,7 @@ static  void  APP_TSK (void *p_arg)
 		//Draw initial watertank and static elements
 	  LCD_DrawLine(0, 119, 100, 119, Black);
 	  LCD_DrawLine(100, 120, 100, 320, Black);
-		GUI_Text( 10, 100, &s, Black, White);
+		//GUI_Text( 10, 100, &s, Black, White);
 		GUI_Text( 50, 20, "Read value:", Black, White);
 		GUI_Text(50, 50, "Act", White, Blue);
 	  GUI_Text( 50, 70, "Caught:", Black, White);
@@ -201,12 +201,12 @@ static  void  APP_TSK (void *p_arg)
 		OSTmrStart(&OUTPUTTmr, &err);
 		while (DEF_TRUE) {
 			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up -- flips random bit in "sensor initialization"
-				if (s==200){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
+				if (s<=200){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
 					int bit_pos = rand() % 32;
 					s ^= (1 << bit_pos); //Flips bit in sensor initialization (May introduce timing fault)
 					tostring((uint8_t*) val1, s);
 					GUI_Text(0,0,"s flipped to: ", Black, White);
-					GUI_Text(120,0,"               ", Black, White); //Clear past value
+					GUI_Text(120,0,"               ", White, White); //Clear past value
 					GUI_Text(120,0,val1, Black, White);
 				}
 			}
@@ -297,7 +297,6 @@ void OutputTmr_callback(OS_TMR  *p_tmr,
 }
 										 
 
-
 void TIMING_TEST (void *p_arg) //If we reach this, the timing_test timer has run out => potential deadline miss!
 {
 	
@@ -306,7 +305,10 @@ void TIMING_TEST (void *p_arg) //If we reach this, the timing_test timer has run
 	caught = caught +1;
 	OSTaskDel(&READ_WL, &err);
 	tostring((uint8_t*) val1, caught);
-	s = 100; //example
+	//Do something safe! This could be same value as last time. Set to match output? Dynamically? Do Nothing?
+	fill = 0; //example
+	drain = 0;
+	s=200;
 	GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
 	
 }
@@ -326,7 +328,7 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 		s= s-1;
 	}
 	WL_r = s;
-	s=200;
+	s=199;
 	OSTmrStop(
 				&TTTmr, //timer pointer
 				OS_OPT_TMR_NONE,//opts

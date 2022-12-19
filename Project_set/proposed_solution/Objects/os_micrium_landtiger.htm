@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\os_micrium_landtiger.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\os_micrium_landtiger.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Dec 19 06:52:23 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Dec 19 07:59:58 2022
 <BR><P>
 <H3>Maximum Stack Usage =        208 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1307,7 +1307,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APP_TSK
 </UL>
 
-<P><STRONG><a name="[49]"></a>main</STRONG> (Thumb, 178 bytes, Stack size 40 bytes, main.o(i.main))
+<P><STRONG><a name="[49]"></a>main</STRONG> (Thumb, 182 bytes, Stack size 40 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = main &rArr; OSInit &rArr; OS_TmrInit &rArr; OSTaskCreate &rArr; OSSched &rArr; OS_PrioGetHighest
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
@@ -1435,7 +1435,7 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[3c]"></a>APP_TSK</STRONG> (Thumb, 418 bytes, Stack size 16 bytes, main.o(i.APP_TSK))
+<P><STRONG><a name="[3c]"></a>APP_TSK</STRONG> (Thumb, 400 bytes, Stack size 16 bytes, main.o(i.APP_TSK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = APP_TSK &rArr; GUI_Text &rArr; PutChar &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;joystick_init
@@ -1471,7 +1471,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.OutputTmr_callback)
 </UL>
-<P><STRONG><a name="[3b]"></a>OutputTmr_callback</STRONG> (Thumb, 58 bytes, Stack size 56 bytes, main.o(i.OutputTmr_callback))
+<P><STRONG><a name="[3b]"></a>OutputTmr_callback</STRONG> (Thumb, 60 bytes, Stack size 56 bytes, main.o(i.OutputTmr_callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = OutputTmr_callback &rArr; OSTaskCreate &rArr; OSSched &rArr; OS_PrioGetHighest
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
@@ -1491,7 +1491,7 @@ Local Symbols
 <BR>[Address Reference Count : 2]<UL><LI> main.o(i.TIMING_TEST)
 <LI> main.o(i.WLTmr_callback)
 </UL>
-<P><STRONG><a name="[38]"></a>TIMING_TEST</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, main.o(i.TIMING_TEST))
+<P><STRONG><a name="[38]"></a>TIMING_TEST</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, main.o(i.TIMING_TEST))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = TIMING_TEST &rArr; GUI_Text &rArr; PutChar &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskDel
@@ -1500,14 +1500,14 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.TTTmr_callback)
 </UL>
-<P><STRONG><a name="[39]"></a>TTTmr_callback</STRONG> (Thumb, 58 bytes, Stack size 56 bytes, main.o(i.TTTmr_callback))
+<P><STRONG><a name="[39]"></a>TTTmr_callback</STRONG> (Thumb, 60 bytes, Stack size 56 bytes, main.o(i.TTTmr_callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = TTTmr_callback &rArr; OSTaskCreate &rArr; OSSched &rArr; OS_PrioGetHighest
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[3a]"></a>WLTmr_callback</STRONG> (Thumb, 58 bytes, Stack size 56 bytes, main.o(i.WLTmr_callback))
+<P><STRONG><a name="[3a]"></a>WLTmr_callback</STRONG> (Thumb, 60 bytes, Stack size 56 bytes, main.o(i.WLTmr_callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = WLTmr_callback &rArr; OSTaskCreate &rArr; OSSched &rArr; OS_PrioGetHighest
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
