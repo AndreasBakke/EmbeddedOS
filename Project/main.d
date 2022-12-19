@@ -1,0 +1,17 @@
+.\main.o: main.c
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\LPC17xx.H
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm3.h
+.\main.o: C:\Keil_v5\ARM\ARMCLAN5\Bin\..\include\stdint.h
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armcc.h
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\system_LPC17xx.h
+.\main.o: C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm3.h
+.\main.o: .\RTE\Device\LPC1768\RTE_Device.h
+.\main.o: includes.h
+.\main.o: C:\Keil_v5\ARM\ARMCLAN5\Bin\..\include\stdarg.h
+.\main.o: C:\Keil_v5\ARM\ARMCLAN5\Bin\..\include\stdio.h
+.\main.o: C:\Keil_v5\ARM\ARMCLAN5\Bin\..\include\stdlib.h
+.\main.o: C:\Keil_v5\ARM\ARMCLAN5\Bin\..\include\math.h
+.\main.o: Software/uC-CPU/ARM-CORTEX-M3/cpu.h

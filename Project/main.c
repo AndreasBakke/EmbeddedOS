@@ -49,7 +49,8 @@ static short max_WL = 200; //Define absolute max water level of tank (Liters)
 static short alert_WL = 180;  //What WL should give alert.
 double WL = 200; //Start water level at 150L - actual water level
 unsigned char WL_r = 0; //Read water level
-
+int outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
+uint8_t * val1[16];
 OS_SEM sem_counter;
 OS_SEM sem_position;
 
@@ -68,8 +69,6 @@ static void App_TaskCreate(void);
 /* Task functions */
 static void APP_TSK ( void   *p_arg );
 static void READ_WL ( void * p_args );
-//static void FILL ( void * p_args );
-//static void DRAIN ( void * p_args );
 static void OUTPUT (void * p_args );
 
 static void WLTmr_callback ( OS_TMR  *p_tmr, void * p_args );
@@ -139,8 +138,6 @@ int  main (void)
                  (OS_ERR     *)&err);
 		
 		OSStart(&err);      /* Start multitasking (i.e. give control to uC/OS-III). */
-		LCD_Clear(White);
-		
     while(DEF_ON){			/* Should Never Get Here	*/
     };
 }
@@ -151,18 +148,15 @@ static  void  APP_TSK (void *p_arg)
 		OS_ERR  os_err;
 		OS_ERR err;
 		CPU_BOOLEAN  status;
-		LCD_Clear(Blue);
 		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
 		LCD_Initialization();
 		joystick_init();
-	
-		srand(time(NULL));
 		BUTTON_init();
 		LCD_Clear(White);
 		
 	  LCD_DrawLine(0, 119, 100, 119, Black);
 	  LCD_DrawLine(100, 120, 100, 320, Black);
-		GUI_Text( 10, 100, "Water tank", Black, White);
+		GUI_Text( 10, 100, &s, Black, White);
 		int i=0;
 		while (i<WL){
 			int level = 320-i;
@@ -175,12 +169,37 @@ static  void  APP_TSK (void *p_arg)
 		OSTmrStart(&OUTPUTTmr, &err);
 	  
 		while (DEF_TRUE) {
-			if (down_KEY1 == 1) {
-					int bit_pos = rand() % 32;
-					 s ^= (1 << bit_pos); //Flips bit in sensor read (May introduce timing faults
-					down_KEY1 = 0;
+			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up
+			 //GUI_Text(0,0,"U", Black, White);
+				int bit_pos = rand() % 32;
+				s ^= (1 << bit_pos); //Flips bit in sensor read (May introduce timing fault)
+				tostring((uint8_t*) val1, s);
+				GUI_Text(0,0,val1, Black, White);
 			}
-			if (down_KEY2 == 1) {
+			else
+				if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joystick down  */
+				//GUI_Text(0,0,"D", Black, White);
+				//unsigned char bit_pos = rand() % 8;
+				//WL_r ^= (1 << bit_pos); //Flips bit in read value
+			}
+
+			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left */
+				//GUI_Text(0,0,"L", Black, White);
+				unsigned char bit_pos = rand() %4;
+				drain ^=(1 << bit_pos);
+				//Flip Drain
+			}
+
+			else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right  */
+				int bit_pos = rand() %32;
+				int *addr = (int *)rand();
+				*addr ^= 1 << bit_pos;
+				//GUI_Text(0,0,"R", Black, White);
+				//unsigned char bit_pos = rand() %8;
+				//drain ^=(1 << bit_pos);
+				//flip drain
+			}
+			/*if (down_KEY2 == 1) {
 					unsigned char bit_pos = rand() % 8;
 					WL_r ^= (1 << bit_pos); //Flips bit in read value
 					down_KEY2 = 0;
@@ -189,8 +208,15 @@ static  void  APP_TSK (void *p_arg)
 					int bit_pos = rand() %8;
 					int *addr = (int *)rand();
 					*addr ^= 1 << bit_pos;
+				
+				
+				//Memory address 1 start: 0x10000000
+				// Size: 0x8000
+				
+				//Mem 2: 0x2007C000
+				//Size 0x8000
 					down_KEY3 = 0;
-			}
+			}*/
 		}		
 		
 }
@@ -232,22 +258,17 @@ void OutputTmr_callback(OS_TMR  *p_tmr,
                  (OS_ERR     *)&err);
 }
 										 
-long outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
-uint8_t * val1[16];
+
 
 void READ_WL (void *p_arg) //Reads water level and creates task
 {
 	(void)p_arg;
-	unsigned char WL_old = WL_r;
-	//OSTmrStart()
-	
 	OS_ERR err;
-	//WL_r = (int)WL;
-	s = 0;
-	while(s < WL){
+	while(s < WL){ //Simulate reading sensor
 		WL_r = s;
 		s= s+1;
 	}
+	s=0;
 	tostring((uint8_t*) val1, WL_r);
 	GUI_Text( 50, 20, "Read value:", Black, White);
 	GUI_Text( 150, 20, (uint8_t *) val1, Black, White);
@@ -267,27 +288,33 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 
 void OUTPUT (void *p_arg) //Drains random amount between 0 and 1L every 1/th of a second
 {
+
 	(void)p_arg;
 	OS_ERR err;
 
   // Store the current value of WL in a variable
-  double WL_old = WL;
+  int WL_old = WL;
 
   // Generate a random value between 0 and 1.5 and assign it to outW
   outW = (double)(rand() % 1500) / 1000;
 
   // Update the value of WL based on the values of outW, drain, and fill
   WL = WL - outW - drain + fill;
-
+	tostring(&val1, WL);
   // Display the updated value of WL on the screen
   GUI_Text(50, 50, "Act", White, Blue);
   GUI_Text(150, 50, (uint8_t*)val1, White, Blue);
-  tostring(&val1, WL);
+  
 
   // Ensure that WL never goes below 0
   if (WL < 0) {
     WL = 0;
+		GUI_Text(110, 200, "TANK EMPTIED", White, Red);
   }
+	
+	else if (WL > 200) {
+		GUI_Text(110, 240, "TANK OVERFLOW", White, Red);
+	}
 
   // If the value of WL has increased, draw blue lines on the screen
   if (WL_old < WL) {

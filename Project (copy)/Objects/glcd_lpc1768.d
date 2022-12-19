@@ -1,0 +1,17 @@
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\Boards\Keil\LPC1768\Common\GLCD_LPC1768.c
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\Device\Include\LPC17xx.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm3.h
+.\objects\glcd_lpc1768.o: D:\programmi\arm\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include\mpu_armv7.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\Device\Include\system_LPC17xx.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\RTE_Driver\PIN_LPC17xx.h
+.\objects\glcd_lpc1768.o: D:\programmi\arm\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\RTE_Driver\GPIO_LPC17xx.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\Boards\Keil\LPC1768\Common\GLCD_Config.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.0\MySWComp\Include\Board_GLCD.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Driver\Include\Driver_SPI.h
+.\objects\glcd_lpc1768.o: C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Driver\Include\Driver_Common.h
+.\objects\glcd_lpc1768.o: D:\programmi\arm\ARM\ARMCC\Bin\..\include\stddef.h
