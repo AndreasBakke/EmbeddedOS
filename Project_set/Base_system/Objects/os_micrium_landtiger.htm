@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\os_micrium_landtiger.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\os_micrium_landtiger.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Dec 19 04:07:04 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Dec 19 06:55:47 2022
 <BR><P>
 <H3>Maximum Stack Usage =        208 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1355,8 +1355,7 @@ Global Symbols
 <P><STRONG><a name="[5a]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;READ_WL
-<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OUTPUT
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OUTPUT
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;APP_TSK
 </UL>
 
@@ -1385,7 +1384,8 @@ Global Symbols
 <P><STRONG><a name="[c0]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, drleqf.o(x$fpl$drleqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_cdrcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OUTPUT
+<BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;READ_WL
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OUTPUT
 </UL>
 
 <P><STRONG><a name="[cd]"></a>_drcmple</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, drleqf.o(x$fpl$drleqf), UNUSED)
@@ -1417,7 +1417,7 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[3a]"></a>APP_TSK</STRONG> (Thumb, 366 bytes, Stack size 16 bytes, main.o(i.APP_TSK))
+<P><STRONG><a name="[3a]"></a>APP_TSK</STRONG> (Thumb, 400 bytes, Stack size 16 bytes, main.o(i.APP_TSK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = APP_TSK &rArr; GUI_Text &rArr; PutChar &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;joystick_init
@@ -1453,19 +1453,19 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.OutputTmr_callback)
 </UL>
-<P><STRONG><a name="[39]"></a>OutputTmr_callback</STRONG> (Thumb, 56 bytes, Stack size 56 bytes, main.o(i.OutputTmr_callback))
+<P><STRONG><a name="[39]"></a>OutputTmr_callback</STRONG> (Thumb, 58 bytes, Stack size 56 bytes, main.o(i.OutputTmr_callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = OutputTmr_callback &rArr; OSTaskCreate &rArr; OSSched &rArr; OS_PrioGetHighest
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[37]"></a>READ_WL</STRONG> (Thumb, 158 bytes, Stack size 24 bytes, main.o(i.READ_WL))
+<P><STRONG><a name="[37]"></a>READ_WL</STRONG> (Thumb, 154 bytes, Stack size 24 bytes, main.o(i.READ_WL))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = READ_WL &rArr; GUI_Text &rArr; PutChar &rArr; LCD_SetPoint &rArr; LCD_SetCursor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GUI_Text
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tostring
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.WLTmr_callback)

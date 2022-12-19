@@ -1,6 +1,6 @@
 Dependencies for Project 'os_micrium_landtiger', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCLAN5
-F (.\main.c)(0x63A053E3)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x63A07B6D)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include\LPC17xx.H)(0x5E1E4344)
 I (C:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm3.h)(0x62702BDE)
 I (C:\Keil_v5\ARM\ARMCLAN5\include\stdint.h)(0x5E8F1DC2)
@@ -23,7 +23,7 @@ I (Software/uC-LIB/lib_ascii.h)(0x63765EBA)
 I (Software/uC-LIB/lib_math.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (Board/adc/adc.h)(0x637BE37E)
 I (C:\Keil_v5\ARM\ARMCLAN5\include\string.h)(0x5E8F1DC2)
@@ -43,7 +43,7 @@ I (.\Software\user\BSP\bsp_os.h)(0x63765EBA)
 I (C:\Keil_v5\ARM\ARMCLAN5\include\time.h)(0x5E8F1DC2)
 F (.\includes.h)(0x637BFD61)()
 F (.\algorithm.c)(0x638B405E)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\algorithm.o --omf_browse .\objects\algorithm.crf --depend .\objects\algorithm.d)
-F (.\demo main.c)(0x63930CCB)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o ".\objects\demo main.o" --omf_browse ".\objects\demo main.crf" --depend ".\objects\demo main.d")
+F (.\demo main.c)(0x63A07B3B)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o ".\objects\demo main.o" --omf_browse ".\objects\demo main.crf" --depend ".\objects\demo main.d")
 F (.\Software\user\BSP\bsp.c)(0x63765EBA)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
 I (.\Software\user\BSP\bsp.h)(0x63765EBA)
 I (.\Software\uC-CPU\ARM-Cortex-M3\cpu.h)(0x63765EBA)
@@ -55,7 +55,7 @@ I (.\Software\uCOS-III\Source\os.h)(0x63765EBA)
 I (.\Software\user\configuration_os\os_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -84,7 +84,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -104,7 +104,7 @@ I (Software\user\configuration_os\./../../../Software/uC-LIB/lib_ascii.h)(0x6376
 I (Software\user\configuration_os\./../../../Software/uC-LIB/lib_math.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (Software\user\configuration_os\./../../../Board/adc/adc.h)(0x637BE37E)
 I (C:\Keil_v5\ARM\ARMCLAN5\include\string.h)(0x5E8F1DC2)
@@ -138,7 +138,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -147,7 +147,7 @@ I (.\Software\user\configuration_os\os_app_hooks.h)(0x63765EBA)
 F (.\Software\user\configuration_os\os_app_hooks.h)(0x63765EBA)()
 F (.\Software\user\configuration_os\os_cfg.h)(0x63765EBA)()
 F (.\Software\user\configuration_os\os_cfg_app.h)(0x63765EBA)()
-F (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)()
+F (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)()
 F (.\Software\uC-Clk\Source\clk.h)(0x63765EBA)()
 F (.\Software\uC-CPU\ARM-Cortex-M3\cpu.h)(0x63765EBA)()
 F (.\Software\uC-CPU\ARM-Cortex-M3\cpu_a.s)(0x63765EBA)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --16 --apcs=interwork -I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver--pd "__UVISION_VERSION SETA 537" --pd "_RTE_ SETA 1" --pd "LPC175x_6x SETA 1" --pd "_RTE_ SETA 1"--list .\listings\cpu_a.lst --xref -o .\objects\cpu_a.o --depend .\objects\cpu_a.d)
@@ -158,7 +158,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 F (.\Software\uC-CPU\cpu_core.c)(0x63765EBA)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\cpu_core.o --omf_browse .\objects\cpu_core.crf --depend .\objects\cpu_core.d)
@@ -168,7 +168,7 @@ I (.\Software\uC-CPU\cpu_def.h)(0x63765EBA)
 I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 F (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)()
@@ -181,7 +181,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\user\configuration_os\csp_cfg.h)(0x63765EBA)
@@ -199,7 +199,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\user\configuration_os\csp_cfg.h)(0x63765EBA)
@@ -215,7 +215,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\user\configuration_os\csp_cfg.h)(0x63765EBA)
@@ -230,7 +230,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\user\configuration_os\csp_cfg.h)(0x63765EBA)
@@ -245,7 +245,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\user\configuration_os\csp_cfg.h)(0x63765EBA)
@@ -269,7 +269,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 F (.\Software\uC-LIB\lib_math.h)(0x63765EBA)()
@@ -282,7 +282,7 @@ I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 F (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)()
 F (.\Software\uC-LIB\lib_str.c)(0x63765EBA)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\lib_str.o --omf_browse .\objects\lib_str.crf --depend .\objects\lib_str.d)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
@@ -291,7 +291,7 @@ I (.\Software\uC-CPU\cpu_def.h)(0x63765EBA)
 I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 F (.\Software\uC-LIB\lib_str.h)(0x63765EBA)()
 F (.\Software\uCOS-III\Source\os.h)(0x63765EBA)()
 F (.\Software\uCOS-III\Source\os_cfg_app.c)(0x63765EBA)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\Software\user\BSP -I .\Software\user\configuration_os -I .\Software\uC-Clk\Source -I .\Software\uC-CPU\ARM-Cortex-M3 -I .\Software\uC-CPU\ -I .\Software\uC-CSP -I .\Software\uC-CSP\LPC1768 -I .\Software\uC-LIB -I .\Software\uC-LIB\Ports\ARM-Cortex-M3 -I .\Software\uCOS-III\Source -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\CSP -I .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic -I C:\Users\franc\AppData\Local\Arm\Packs\ARM\CMSIS-Driver\2.4.0\SPI-I.\RTE\Device\LPC1768-I.\RTE\_Target_1-IC:\Users\stefano\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\Device\Include-IC:\Users\stefano\AppData\Local\Arm\Packs\Keil\LPC1700_DFP\2.7.1\RTE_Driver-D__UVISION_VERSION="537" -D_RTE_ -DLPC175x_6x -D_RTE_-o .\objects\os_cfg_app.o --omf_browse .\objects\os_cfg_app.crf --depend .\objects\os_cfg_app.d)
@@ -304,7 +304,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -318,7 +318,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -332,7 +332,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -346,7 +346,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -360,7 +360,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -374,7 +374,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -388,7 +388,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -402,7 +402,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -416,7 +416,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -430,7 +430,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -444,7 +444,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -458,7 +458,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -472,7 +472,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -486,7 +486,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -500,7 +500,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -514,7 +514,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -528,7 +528,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -543,7 +543,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -557,7 +557,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)
@@ -579,7 +579,7 @@ I (.\Software\user\configuration_os\cpu_cfg.h)(0x63765EBA)
 I (.\Software\uC-CPU\cpu_core.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_def.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_mem.h)(0x63765EBA)
-I (.\Software\user\configuration_os\app_cfg.h)(0x63930B7B)
+I (.\Software\user\configuration_os\app_cfg.h)(0x63A074D8)
 I (.\Software\uC-LIB\lib_str.h)(0x63765EBA)
 I (.\Software\uC-LIB\lib_ascii.h)(0x63765EBA)
 I (.\Software\uCOS-III\Source\os_type.h)(0x63765EBA)

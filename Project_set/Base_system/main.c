@@ -40,11 +40,11 @@ static  CPU_STK_SIZE	OUTPUT_STACK[APP_CFG_TASK_STK_SIZE];
 /* Global Variables*/
 uint16_t position = 0;
 uint16_t counter = 0;
-static short s = 0;
+static int s = 0;
 
 static short max_WL = 200; //Define absolute max water level of tank (Liters)
 static short alert_WL = 180;  //What WL should give alert.
-double WL = 200; //Start water level at 150L - actual water level
+double WL = 150; //Start water level at 150L - actual water level
 unsigned char WL_r = 0; //Read water level
 int outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
 uint8_t * val1[16];
@@ -186,11 +186,13 @@ static  void  APP_TSK (void *p_arg)
 	  
 		while (DEF_TRUE) {
 			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up -- flips random bit in "sensor initialization"
-				if (s==0){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
-					int bit_pos = rand() % 16;
+				if (s==200){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
+					int bit_pos = rand() % 32;
 					s ^= (1 << bit_pos); //Flips bit in sensor initialization (May introduce timing fault)
 					tostring((uint8_t*) val1, s);
-					GUI_Text(0,0,val1, Black, White);
+					GUI_Text(0,0,"s flipped to: ", Black, White);
+					GUI_Text(120,0,"               ", Black, White); //Clear past value
+					GUI_Text(120,0,val1, Black, White);
 				}
 			}
 			else
@@ -275,11 +277,11 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	*/
 	
 	
-	while(s < WL){ //Simulate reading sensor
-		s= s+1;
+	while(s > WL){ //Simulate reading sensor
+		s= s-1;
 	}
 	WL_r = s;
-	s=0;
+	s=200;
 	 
 	
 	

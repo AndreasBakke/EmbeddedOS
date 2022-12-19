@@ -26,7 +26,9 @@ short down_KEY3;
 static  OS_TCB        APP_TSK_TCB;
 static	OS_TCB			  READ_WL_TCB; //Task for reading waterlevel
 static  OS_TCB        OUTPUT_TCB;  //"Analog" task
+static  OS_TCB				TT_TCB; // Timing test TCB
 
+static OS_TMR  TTTmr; //Timing test timer //This gives us an error!!!!
 static OS_TMR  WLTmr; //Waterlevel timer
 static OS_TMR  OUTPUTTmr; //Random output timer
 
@@ -34,22 +36,25 @@ static OS_TMR  OUTPUTTmr; //Random output timer
 static  CPU_STK_SIZE  APP_TSK_STACK[APP_CFG_TASK_STK_SIZE];
 static	CPU_STK_SIZE	READ_WL_STACK[APP_CFG_TASK_STK_SIZE];
 static  CPU_STK_SIZE	OUTPUT_STACK[APP_CFG_TASK_STK_SIZE];
+static  CPU_STK_SIZE  TT_STACK[APP_CFG_TASK_STK_SIZE];
 
 
 
 /* Global Variables*/
 uint16_t position = 0;
 uint16_t counter = 0;
-static short s = 0;
+static int s = 200;
+static int caught = 0;
 
 static short max_WL = 200; //Define absolute max water level of tank (Liters)
 static short alert_WL = 180;  //What WL should give alert.
-double WL = 200; //Start water level at 150L - actual water level
+double WL = 150; //Start water level at 150L - actual water level
 unsigned char WL_r = 0; //Read water level
 int outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
 uint8_t * val1[16];
 OS_SEM sem_counter;
 OS_SEM sem_position;
+
 
 /*
 *********************************************************************************************************
@@ -67,9 +72,11 @@ static void App_TaskCreate(void);
 static void APP_TSK ( void   *p_arg );
 static void READ_WL ( void * p_args );
 static void OUTPUT (void * p_args );
+static void TIMING_TEST (void * p_args );
 
 static void WLTmr_callback ( OS_TMR  *p_tmr, void * p_args );
 static void OutputTmr_callback ( OS_TMR  *p_tmr, void * p_args );
+static void TTTmr_callback( OS_TMR  *p_tmr, void * p_args );
 /**********************************************************************************************************
 *                                                main()
 *
@@ -111,6 +118,14 @@ int  main (void)
 	
 		*/
 	
+		OSTmrCreate(&TTTmr,         				/* p_tmr          */
+										"Timing_test_timer",           	   /* p_name         */
+										0,                    /* dly            */
+										1,                    /* period =500ms       */
+										OS_OPT_TMR_ONE_SHOT,   /* opt            */
+										TTTmr_callback,				 /* p_callback     */
+										0,                     /* p_callback_arg */
+									 &err); 
 	
 	
 	
@@ -173,6 +188,7 @@ static  void  APP_TSK (void *p_arg)
 		GUI_Text( 10, 100, &s, Black, White);
 		GUI_Text( 50, 20, "Read value:", Black, White);
 		GUI_Text(50, 50, "Act", White, Blue);
+	  GUI_Text( 50, 70, "Caught:", Black, White);
 		int i=0;
 		while (i<WL){
 			int level = 320-i;
@@ -183,14 +199,15 @@ static  void  APP_TSK (void *p_arg)
 		
 		OSTmrStart(&WLTmr, &err);
 		OSTmrStart(&OUTPUTTmr, &err);
-	  
 		while (DEF_TRUE) {
 			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up -- flips random bit in "sensor initialization"
-				if (s==0){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
-					int bit_pos = rand() % 16;
+				if (s==200){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
+					int bit_pos = rand() % 32;
 					s ^= (1 << bit_pos); //Flips bit in sensor initialization (May introduce timing fault)
 					tostring((uint8_t*) val1, s);
-					GUI_Text(0,0,val1, Black, White);
+					GUI_Text(0,0,"s flipped to: ", Black, White);
+					GUI_Text(120,0,"               ", Black, White); //Clear past value
+					GUI_Text(120,0,val1, Black, White);
 				}
 			}
 			else
@@ -222,7 +239,23 @@ static  void  APP_TSK (void *p_arg)
 
 */
 
-
+void TTTmr_callback(OS_TMR  *p_tmr,
+                     void    *p_arg){
+	OS_ERR err;
+	OSTaskCreate((OS_TCB     *)&TT_TCB,              
+                 (CPU_CHAR   *)"Reacts to timing test timer",
+                 (OS_TASK_PTR ) TIMING_TEST,
+                 (void       *) 0,
+                 (OS_PRIO     ) TIMING_TEST_PRIO, //Definied in app_cfg.h
+                 (CPU_STK    *)&TT_STACK[0],
+                 (CPU_STK     )(APP_CFG_TASK_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) APP_CFG_TASK_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
+}
 
 //Callback function for the WL timer
 void WLTmr_callback(OS_TMR  *p_tmr,
@@ -265,6 +298,19 @@ void OutputTmr_callback(OS_TMR  *p_tmr,
 										 
 
 
+void TIMING_TEST (void *p_arg) //If we reach this, the timing_test timer has run out => potential deadline miss!
+{
+	
+	(void)p_arg;
+	OS_ERR err;
+	caught = caught +1;
+	OSTaskDel(&READ_WL, &err);
+	tostring((uint8_t*) val1, caught);
+	s = 100; //example
+	GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
+	
+}
+
 void READ_WL (void *p_arg) //Reads water level and creates task
 {
 	(void)p_arg;
@@ -273,17 +319,22 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	/*
 	TODO: Implement one or more acceptance test with basis in the task description and theory
 	*/
+	 
+	OSTmrStart(&TTTmr, &err);
 	
-	
-	while(s < WL){ //Simulate reading sensor
-		s= s+1;
+	while(s > WL){ //Simulate reading sensor
+		s= s-1;
 	}
 	WL_r = s;
-	s=0;
-	 
+	s=200;
+	OSTmrStop(
+				&TTTmr, //timer pointer
+				OS_OPT_TMR_NONE,//opts
+				0,							//args
+				&err					//err
+	); //Stop if we have done something
 	
-	
-	
+
 	
 	
 	//Display read Water level
@@ -300,6 +351,7 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 		drain = 0;
 		fill = 1+ outW*2-WL_r/100;
 	}
+	
 }
 
 

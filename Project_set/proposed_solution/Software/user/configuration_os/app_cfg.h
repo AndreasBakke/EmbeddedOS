@@ -57,10 +57,10 @@
 *********************************************************************************************************
 */
 #define  OS_LOWEST_PRIO 													5u
+#define  TIMING_TEST_PRIO													4u
 #define  APP_CFG_TASK_PRIO                  			11u
 #define  READ_WL_PRIO                      				10u
 #define  OUTPUT_PRIO															6u
-
 #define  OS_TASK_TMR_PRIO                         (OS_LOWEST_PRIO - 2)
 
 
@@ -70,7 +70,7 @@
 *********************************************************************************************************
 */
 
-#define  APP_CFG_TASK_STK_SIZE                     64u
+#define  APP_CFG_TASK_STK_SIZE                     128u
 
 
 /*

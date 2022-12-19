@@ -161,7 +161,7 @@ void TIMER3_IRQHandler (void)
 	GUI_Text(10, 300, ">>  reset to try again  <<", White, Red);
 	song=2;
 	note=0;*/
-	enable_timer(1);	
+	//enable_timer(1);	
 	LPC_TIM3->IR = 1;			/* clear interrupt flag */
   return;
 }
