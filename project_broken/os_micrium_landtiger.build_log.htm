@@ -1,0 +1,252 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.37.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Stefano Di Carlo, Politecnico di Torino, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.37.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLAN5\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.37.0.0
+Dialog DLL:      DARMP1.DLL V1.28.1.0
+Target DLL:      UL2CM3.DLL V1.164.7.0
+Dialog DLL:      TARMP1.DLL V1.27.1.0
+ 
+<h2>Project:</h2>
+Z:\EmbeddedOS\Project\os_micrium_landtiger.uvprojx
+Project File Date:  12/16/2022
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCLAN5\Bin'
+Rebuild target 'Target 1'
+Note: source file '.\Board\GLCD\AsciiLib.c' - object file renamed from '.\AsciiLib.o' to '.\asciilib_1.o'.
+Note: source file '.\Board\GLCD\GLCD.c' - object file renamed from '.\GLCD.o' to '.\glcd_1.o'.
+Note: source file '.\Board\GLCD\HzLib.c' - object file renamed from '.\HzLib.o' to '.\hzlib_1.o'.
+compiling algorithm.c...
+algorithm.c(33): warning:  #1-D: last line of file ends without a newline
+  //}
+algorithm.c: 1 warning, 0 errors
+compiling demo main.c...
+compiling main.c...
+Software/uC-CPU/ARM-CORTEX-M3/cpu.h(84): error:  #5: cannot open source input file "cpu_def.h": No such file or directory
+  #include  <cpu_def.h>
+main.c: 0 warnings, 1 error
+compiling bsp.c...
+Software\user\BSP\bsp.c(47): error:  #5: cannot open source input file "bsp.h": No such file or directory
+  #include <bsp.h>
+Software\user\BSP\bsp.c: 0 warnings, 1 error
+compiling bsp_os.c...
+Software\user\BSP\bsp_os.h(46): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include  <os.h>
+Software\user\BSP\bsp_os.c: 0 warnings, 1 error
+compiling app_hooks.c...
+Software\user\configuration_os\./../../../Software/uC-CPU/ARM-CORTEX-M3/cpu.h(84): error:  #5: cannot open source input file "cpu_def.h": No such file or directory
+  #include  <cpu_def.h>
+Software\user\configuration_os\app_hooks.c: 0 warnings, 1 error
+compiling os_app_hooks.c...
+Software\user\configuration_os\os_app_hooks.c(29): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\user\configuration_os\os_app_hooks.c: 0 warnings, 1 error
+assembling cpu_a.s...
+compiling cpu_c.c...
+Software\uC-CPU\ARM-Cortex-M3\cpu_c.c(45): error:  #5: cannot open source input file "cpu.h": No such file or directory
+  #include  <cpu.h>
+Software\uC-CPU\ARM-Cortex-M3\cpu_c.c: 0 warnings, 1 error
+compiling cpu_core.c...
+Software\uC-CPU\cpu_core.c(43): error:  #5: cannot open source input file "cpu_core.h": No such file or directory
+  #include  <cpu_core.h>
+Software\uC-CPU\cpu_core.c: 0 warnings, 1 error
+compiling csp.c...
+Software\uC-CSP\csp.c(48): error:  #5: cannot open source input file "csp.h": No such file or directory
+  #include <csp.h>
+Software\uC-CSP\csp.c: 0 warnings, 1 error
+compiling csp_gpio.c...
+Software\uC-CSP\LPC1768\csp_gpio.c(44): error:  #5: cannot open source input file "csp.h": No such file or directory
+  #include   <csp.h>
+Software\uC-CSP\LPC1768\csp_gpio.c: 0 warnings, 1 error
+compiling csp_int.c...
+Software\uC-CSP\LPC1768\csp_int.c(45): error:  #5: cannot open source input file "csp.h": No such file or directory
+  #include   <csp.h>
+Software\uC-CSP\LPC1768\csp_int.c: 0 warnings, 1 error
+compiling csp_pm.c...
+Software\uC-CSP\LPC1768\csp_pm.c(45): error:  #5: cannot open source input file "csp.h": No such file or directory
+  #include   <csp.h>
+Software\uC-CSP\LPC1768\csp_pm.c: 0 warnings, 1 error
+compiling csp_tmr.c...
+Software\uC-CSP\LPC1768\csp_tmr.c(46): error:  #5: cannot open source input file "csp.h": No such file or directory
+  #include  <csp.h>
+Software\uC-CSP\LPC1768\csp_tmr.c: 0 warnings, 1 error
+compiling lib_ascii.c...
+Software\uC-LIB\lib_ascii.c(82): error:  #5: cannot open source input file "lib_ascii.h": No such file or directory
+  #include  <lib_ascii.h>
+Software\uC-LIB\lib_ascii.c: 0 warnings, 1 error
+assembling lib_mem_a.asm...
+compiling lib_math.c...
+Software\uC-LIB\lib_math.c(69): error:  #5: cannot open source input file "lib_math.h": No such file or directory
+  #include  <lib_math.h>
+Software\uC-LIB\lib_math.c: 0 warnings, 1 error
+compiling lib_mem.c...
+Software\uC-LIB\lib_mem.c(60): error:  #5: cannot open source input file "lib_mem.h": No such file or directory
+  #include  <lib_mem.h>
+Software\uC-LIB\lib_mem.c: 0 warnings, 1 error
+compiling lib_str.c...
+Software\uC-LIB\lib_str.c(70): error:  #5: cannot open source input file "lib_str.h": No such file or directory
+  #include  <lib_str.h>
+Software\uC-LIB\lib_str.c: 0 warnings, 1 error
+compiling os_cfg_app.c...
+Software\uCOS-III\Source\os_cfg_app.c(36): error:  #5: cannot open source input file "os_cfg_app.h": No such file or directory
+  #include <os_cfg_app.h>
+Software\uCOS-III\Source\os_cfg_app.c: 0 warnings, 1 error
+compiling os_core.c...
+Software\uCOS-III\Source\os_core.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_core.c: 0 warnings, 1 error
+compiling os_dbg.c...
+Software\uCOS-III\Source\os_dbg.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_dbg.c: 0 warnings, 1 error
+compiling os_flag.c...
+Software\uCOS-III\Source\os_flag.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_flag.c: 0 warnings, 1 error
+compiling os_int.c...
+Software\uCOS-III\Source\os_int.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include  <os.h>
+Software\uCOS-III\Source\os_int.c: 0 warnings, 1 error
+compiling os_mem.c...
+Software\uCOS-III\Source\os_mem.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include  <os.h>
+Software\uCOS-III\Source\os_mem.c: 0 warnings, 1 error
+compiling os_msg.c...
+Software\uCOS-III\Source\os_msg.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_msg.c: 0 warnings, 1 error
+compiling os_mutex.c...
+Software\uCOS-III\Source\os_mutex.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_mutex.c: 0 warnings, 1 error
+compiling os_pend_multi.c...
+Software\uCOS-III\Source\os_pend_multi.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_pend_multi.c: 0 warnings, 1 error
+compiling os_prio.c...
+Software\uCOS-III\Source\os_prio.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_prio.c: 0 warnings, 1 error
+compiling os_q.c...
+Software\uCOS-III\Source\os_q.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_q.c: 0 warnings, 1 error
+compiling os_sem.c...
+Software\uCOS-III\Source\os_sem.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_sem.c: 0 warnings, 1 error
+compiling os_stat.c...
+Software\uCOS-III\Source\os_stat.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_stat.c: 0 warnings, 1 error
+compiling os_task.c...
+Software\uCOS-III\Source\os_task.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_task.c: 0 warnings, 1 error
+compiling os_tick.c...
+Software\uCOS-III\Source\os_tick.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_tick.c: 0 warnings, 1 error
+compiling os_time.c...
+Software\uCOS-III\Source\os_time.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_time.c: 0 warnings, 1 error
+compiling os_tmr.c...
+Software\uCOS-III\Source\os_tmr.c(34): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_tmr.c: 0 warnings, 1 error
+compiling os_var.c...
+Software\uCOS-III\Source\os_var.c(36): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Source\os_var.c: 0 warnings, 1 error
+compiling os_csp.c...
+Software\uCOS-III\Ports\ARM-Cortex-M3\CSP\os_csp.c(23): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include <os.h>
+Software\uCOS-III\Ports\ARM-Cortex-M3\CSP\os_csp.c: 0 warnings, 1 error
+assembling os_cpu_a.s...
+compiling os_cpu_c.c...
+Software\uCOS-III\Ports\ARM-Cortex-M3\Generic\os_cpu_c.c(48): error:  #5: cannot open source input file "os.h": No such file or directory
+  #include  <os.h>
+Software\uCOS-III\Ports\ARM-Cortex-M3\Generic\os_cpu_c.c: 0 warnings, 1 error
+compiling AsciiLib.c...
+compiling funct_joystick.c...
+compiling HzLib.c...
+compiling lib_joystick.c...
+compiling funct_led.c...
+compiling lib_led.c...
+compiling IRQ_timer.c...
+compiling lib_timer.c...
+compiling IRQ_button.c...
+Board\button_EXINT\button.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif
+Board\button_EXINT\IRQ_button.c: 1 warning, 0 errors
+compiling GLCD.c...
+compiling lib_button.c...
+Board\button_EXINT\button.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif
+Board\button_EXINT\lib_button.c: 1 warning, 0 errors
+assembling startup_LPC17xx.s...
+compiling GPIO_LPC17xx.c...
+compiling PIN_LPC17xx.c...
+compiling system_LPC17xx.c...
+".\os_micrium_landtiger.axf" - 36 Error(s), 3 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.LPC1700_DFP.2.7.1.pack
+                Keil.LPC1700_DFP.2.7.1
+                NXP LPC1700 Series Device Support, Drivers and Examples for MCB1700 and LPC1788-32
+   * Component: GPIO Version: 1.1.0
+   * Component: PIN Version: 1.0.0
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/LPC1768
+  ./RTE/_Target_1
+  C:/Users/stefano/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/stefano/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.1/Device/Include
+  C:/Users/stefano/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.1/RTE_Driver
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:GPIO:1.1.0
+      Source file:   RTE_Driver/GPIO_LPC17xx.c
+      Include file:  RTE_Driver/GPIO_LPC17xx.h
+
+   * Component: Keil::Device:PIN:1.0.0
+      Include file:  RTE_Driver/PIN_LPC17xx.h
+      Source file:   RTE_Driver/PIN_LPC17xx.c
+
+   * Component: Keil::Device:Startup:1.0.0
+      Include file:  Device/Include/LPC17xx.h
+      Source file:   Device/Source/ARM/startup_LPC17xx.s
+      Source file:   Device/Source/system_LPC17xx.c
+      Include file:  RTE_Driver/Config/RTE_Device.h
+Target not created.
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

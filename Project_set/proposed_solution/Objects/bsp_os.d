@@ -1,0 +1,16 @@
+.\objects\bsp_os.o: Software\user\BSP\bsp_os.c
+.\objects\bsp_os.o: Software\user\BSP\bsp_os.h
+.\objects\bsp_os.o: .\Software\uCOS-III\Source\os.h
+.\objects\bsp_os.o: .\Software\user\configuration_os\os_cfg.h
+.\objects\bsp_os.o: .\Software\uC-CPU\ARM-Cortex-M3\cpu.h
+.\objects\bsp_os.o: .\Software\uC-CPU\cpu_def.h
+.\objects\bsp_os.o: .\Software\user\configuration_os\cpu_cfg.h
+.\objects\bsp_os.o: .\Software\uC-CPU\cpu_core.h
+.\objects\bsp_os.o: .\Software\uC-LIB\lib_def.h
+.\objects\bsp_os.o: .\Software\uC-LIB\lib_mem.h
+.\objects\bsp_os.o: .\Software\uC-CPU\cpu_core.h
+.\objects\bsp_os.o: .\Software\user\configuration_os\app_cfg.h
+.\objects\bsp_os.o: .\Software\uC-LIB\lib_str.h
+.\objects\bsp_os.o: .\Software\uC-LIB\lib_ascii.h
+.\objects\bsp_os.o: .\Software\uCOS-III\Source\os_type.h
+.\objects\bsp_os.o: .\Software\uCOS-III\Ports\ARM-Cortex-M3\Generic\os_cpu.h

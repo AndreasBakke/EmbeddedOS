@@ -1,0 +1,1 @@
+.\algorithm.o: algorithm.c
