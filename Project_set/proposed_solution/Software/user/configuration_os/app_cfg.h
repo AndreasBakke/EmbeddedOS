@@ -53,14 +53,16 @@
 #define	 OS_TMR_EN 1
 /*
 *********************************************************************************************************
-*                                            TASK PRIORITIES
+*                                            TASK PRIORITIES (Low prio number = high priority ref. manual)
 *********************************************************************************************************
 */
-#define  OS_LOWEST_PRIO 													5u
-#define  TIMING_TEST_PRIO													4u
-#define  APP_CFG_TASK_PRIO                  			11u
-#define  READ_WL_PRIO                      				10u
-#define  OUTPUT_PRIO															6u
+#define  OS_LOWEST_PRIO 													7u
+#define  APP_CFG_TASK_PRIO                  			14u
+#define  READ_WL_PRIO                      				13u
+#define  OUTPUT_PRIO															12u
+#define  MONITOR_PRIO															11u
+#define  TIMING_TEST_PRIO													10u
+
 #define  OS_TASK_TMR_PRIO                         (OS_LOWEST_PRIO - 2)
 
 

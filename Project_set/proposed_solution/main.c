@@ -29,17 +29,19 @@ static  OS_TCB        APP_TSK_TCB;
 static	OS_TCB			  READ_WL_TCB; //Task for reading waterlevel
 static  OS_TCB        OUTPUT_TCB;  //"Analog" task
 static  OS_TCB				TT_TCB; // Timing test TCB
+static  OS_TCB        MONITOR_TCB;
 
-static OS_TMR  TTTmr; //Timing test timer //This gives us an error!!!!
+static OS_TMR  TTTmr; //Timing test timer
 static OS_TMR  WLTmr; //Waterlevel timer
 static OS_TMR  OUTPUTTmr; //Random output timer
+static OS_TMR  MONITORTmr; //Timer for monitor task
 
 /* Definition of the Stacks for tasks */
 static  CPU_STK_SIZE  APP_TSK_STACK[APP_CFG_TASK_STK_SIZE];
 static	CPU_STK_SIZE	READ_WL_STACK[APP_CFG_TASK_STK_SIZE];
 static  CPU_STK_SIZE	OUTPUT_STACK[APP_CFG_TASK_STK_SIZE];
 static  CPU_STK_SIZE  TT_STACK[APP_CFG_TASK_STK_SIZE];
-
+static  CPU_STK_SIZE 	MONITOR_STACK[APP_CFG_TASK_STK_SIZE];
 
 
 /* Global Variables*/
@@ -72,10 +74,12 @@ static void APP_TSK ( void   *p_arg );
 static void READ_WL ( void * p_args );
 static void OUTPUT (void * p_args );
 static void TIMING_TEST (void * p_args );
+static void MONITOR (void * p_args );
 
 static void WLTmr_callback ( OS_TMR  *p_tmr, void * p_args );
 static void OutputTmr_callback ( OS_TMR  *p_tmr, void * p_args );
 static void TTTmr_callback( OS_TMR  *p_tmr, void * p_args );
+static void MONITOR_callback (OS_TMR *p_tmr, void * p_args );
 /**********************************************************************************************************
 *                                                main()
 *
@@ -124,7 +128,15 @@ int  main (void)
 										TTTmr_callback,				 /* p_callback     */
 										0,                     /* p_callback_arg */
 									 &err); 
-	
+		/* Timer for monitoring task */
+		OSTmrCreate( &MONITORTmr,         				/* p_tmr          */
+										"Monitor_timer",           	   /* p_name         */
+									  11,                    /* dly =1.1s       */
+										1,                    /* period =100ms       */
+										OS_OPT_TMR_PERIODIC,   /* opt            */
+										MONITOR_callback,				 /* p_callback     */
+										0,                     /* p_callback_arg */
+									 &err); 
 	
 	
 		//Create timer to read waterlevel which fires every 1s
@@ -196,6 +208,7 @@ static  void  APP_TSK (void *p_arg)
 		
 		OSTmrStart(&WLTmr, &err);
 		OSTmrStart(&OUTPUTTmr, &err);
+		OSTmrStart(&MONITORTmr, &err); //Remember to start the timer
 		while (DEF_TRUE) {
 			if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){ //Joystick up -- flips random bit in "sensor initialization"
 				if (s<=200){ //Only flip bit once every second. Will be reset to 0 after read => new bit flip
@@ -250,6 +263,27 @@ void TTTmr_callback(OS_TMR  *p_tmr,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  (OS_ERR     *)&err);
 }
+	
+//Callback function for monitor timer
+void MONITOR_callback(OS_TMR  *p_tmr,
+                     void    *p_arg){
+	OS_ERR err;
+	OSTaskCreate((OS_TCB     *)&MONITOR_TCB,              
+                 (CPU_CHAR   *)"Monitors important values and looks for errors",
+                 (OS_TASK_PTR ) MONITOR,
+                 (void       *) 0,
+                 (OS_PRIO     ) MONITOR_PRIO, //Definied in app_cfg.h
+                 (CPU_STK    *)&MONITOR_STACK[0],
+                 (CPU_STK     )(APP_CFG_TASK_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) APP_CFG_TASK_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
+}
+
+
 
 //Callback function for the WL timer
 void WLTmr_callback(OS_TMR  *p_tmr,
@@ -298,7 +332,7 @@ void TIMING_TEST (void *p_arg) //If we reach this, the timing_test timer has run
 	OS_ERR err;
 	caught = caught +1;
 	tostring((uint8_t*) val1, caught);
-	
+	GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
 	
 	//Two recovery-options: Gracefull degredation vs Hard recovery
 	/*Gracefull degredation: Alter system to reach deadline. 
@@ -319,18 +353,104 @@ void TIMING_TEST (void *p_arg) //If we reach this, the timing_test timer has run
 	OSTaskDel(&READ_WL, &err);
 	fill = 0; //example
 	s=200;
-	GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
+	
+	//Example of gracefull degredation:
+	/*
+	OSTaskDel(&READ_WL, &err); //stop task
+	OSTaskCreate(....); //Start it again
+	
+	//OR
+	OSTaskChangePrio(...);
+	
+	
+	//Note: Additional logic may be required if both gracefull degredation & hard recovery is implemented to determine which recovery should be used.	
+	*/
+
 }
+
+//Monitors important values in our system
+void MONITOR (void *p_arg)
+{
+	(void)p_arg;
+	OS_ERR err;
+	unsigned char WL_new = WL_r; //Use local variables
+  int fill_new = fill; //Use local variables
+	/* Variables to store last known values */
+	static unsigned char WL_prev = 150; //initialization of static variables to some "insignificant value"
+	static int fill_prev = 1; 
+	
+	/*   We have multiple ways of monitoring, and checking for errors. See "learn by heart list"
+	*    Only some options will be implemented here.
+	*    Detection implies something has gone wrong (water level read wrong / bit flipped) etc.
+	*    Recovery is here "set the same as last time" which may still lead to errors (multiple faults in a row), but highly unlikely.
+	*/
+	
+	//Reasonableness test:
+	if((WL_new > 200) || (WL_new <0)) {//Detection
+		//recovery
+		WL_r = WL_prev; //Set WL_r to last known value
+		WL_new = WL_prev; //remember to update WL_new;
+		caught = caught +1;
+		tostring((uint8_t*) val1, caught);
+		GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
+	};
+	
+	if((fill_new > 3) || (fill_new <0)) { //Detection. These implies "illegal values" and we need to recover
+		fill = fill_prev;
+		fill_new = fill_prev;
+		
+	  caught = caught +1;
+		tostring((uint8_t*) val1, caught);
+		GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
+	};
+	
+	
+	
+	
+	//Dynamic reasonableness-test:
+	if(abs(WL_new - WL_prev)>10) { //Detection
+		WL_r = WL_prev; //update the read-value
+		WL_new = WL_prev; //remember to update WL_new;
+		
+		caught = caught +1;
+		tostring((uint8_t*) val1, caught);
+		GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
+	};
+	
+	if (abs(fill_new - fill_prev) >2){ //Detection, big leaps from low fills to high fills implies something may be wrong
+		fill = fill_prev;
+		fill_new = fill_prev;
+		
+		caught = caught +1;
+		tostring((uint8_t*) val1, caught);
+		GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
+
+	};
+	
+	
+	// "Contextual reasonableness-test" - here done as last test, so that WL_new & fill_new hopefully are safe
+	if (WL_new > 170 && fill_new > 0) {
+		//Whenever WL is higher than 170, we should not fill. Based on this context, we can detect errors.
+		fill = 0;
+		fill_new = 0;
+	};
+	
+	if (WL_new < 10 && fill_new < 2) { //Can also check lower-values for context-correctness
+		//Not implemented
+	};
+	
+	
+	WL_prev = WL_new; //Save current value for next time
+	fill_prev = fill_new; //Save current value
+}
+
+
 
 void READ_WL (void *p_arg) //Reads water level and creates task
 {
 	(void)p_arg;
 	OS_ERR err;
-	
-	/*
-	TODO: Implement one or more acceptance test with basis in the task description and theory
-	*/
-	 
+
 	OSTmrStart(&TTTmr, &err); //Start the watchdog timer
 	
 	while(s > WL){ //Simulate reading sensor
@@ -338,8 +458,6 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	}
 	WL_r = s;
 	s=199;
-	
-	
 	
 	//Display read Water level
 	tostring((uint8_t*) val1, WL_r);

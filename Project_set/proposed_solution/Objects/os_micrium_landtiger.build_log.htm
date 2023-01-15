@@ -30,17 +30,23 @@ Rebuild target 'Target 1'
 Note: source file '.\Board\GLCD\AsciiLib.c' - object file renamed from '.\Objects\AsciiLib.o' to '.\Objects\asciilib_1.o'.
 Note: source file '.\Board\GLCD\GLCD.c' - object file renamed from '.\Objects\GLCD.o' to '.\Objects\glcd_1.o'.
 Note: source file '.\Board\GLCD\HzLib.c' - object file renamed from '.\Objects\HzLib.o' to '.\Objects\hzlib_1.o'.
+compiling demo main.c...
 compiling algorithm.c...
 algorithm.c(33): warning:  #1-D: last line of file ends without a newline
   //}
 algorithm.c: 1 warning, 0 errors
-compiling demo main.c...
 compiling bsp_os.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\user\BSP\bsp_os.c: 2 warnings, 0 errors
+compiling bsp.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\user\BSP\bsp.c: 2 warnings, 0 errors
 compiling main.c...
 Board/adc/adc.h(12): warning:  #1-D: last line of file ends without a newline
   #endif 
@@ -50,41 +56,47 @@ Board/button_EXINT/button.h(12): warning:  #1-D: last line of file ends without 
   #define OS_CFG_TASK_DEL_EN              0u   /* Include code for OSTaskDel()                                          */
 .\Software\user\configuration_os\os_cfg.h(102): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 52 of ".\Software\user\configuration_os\app_cfg.h")
   #define OS_CFG_TMR_EN                   1u   /* Enable (1) or Disable (0) code generation for TIMERS                  */
-main.c(123): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
+main.c(128): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
   										TTTmr_callback,				 /* p_callback     */
-main.c(135): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
+main.c(137): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
+  										MONITOR_callback,				 /* p_callback     */
+main.c(148): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
   										WLTmr_callback,				 /* p_callback     */
-main.c(146): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
+main.c(159): warning:  #167-D: argument of type "void (*)(OS_TMR *, void *)" is incompatible with parameter of type "OS_TMR_CALLBACK_PTR"
   										OutputTmr_callback,				 /* p_callback     */
-main.c(206): warning:  #167-D: argument of type "uint8_t **" is incompatible with parameter of type "uint8_t *"
+main.c(220): warning:  #167-D: argument of type "uint8_t **" is incompatible with parameter of type "uint8_t *"
   					GUI_Text(120,0,val1, Black, White);
-main.c(172): warning:  #177-D: variable "os_err"  was declared but never referenced
+main.c(185): warning:  #177-D: variable "os_err"  was declared but never referenced
   		OS_ERR  os_err;
-main.c(174): warning:  #177-D: variable "status"  was declared but never referenced
+main.c(187): warning:  #177-D: variable "status"  was declared but never referenced
   		CPU_BOOLEAN  status;
-main.c(299): warning:  #223-D: function "OSTaskDel" declared implicitly
+main.c(353): warning:  #223-D: function "OSTaskDel" declared implicitly
   	OSTaskDel(&READ_WL, &err);
-main.c(367): warning:  #167-D: argument of type "uint8_t *(*)[16]" is incompatible with parameter of type "uint8_t *"
-  	tostring(&val1, WL);
-main.c(357): warning:  #177-D: variable "err"  was declared but never referenced
+main.c(389): warning:  #186-D: pointless comparison of unsigned integer with zero
+  	if((WL_new > 200) || (WL_new <0)) {//Detection
+main.c(375): warning:  #177-D: variable "err"  was declared but never referenced
   	OS_ERR err;
-main.c(425): warning:  #1-D: last line of file ends without a newline
+main.c(504): warning:  #167-D: argument of type "uint8_t *(*)[16]" is incompatible with parameter of type "uint8_t *"
+  	tostring(&val1, WL);
+main.c(494): warning:  #177-D: variable "err"  was declared but never referenced
+  	OS_ERR err;
+main.c(562): warning:  #1-D: last line of file ends without a newline
       }
-main.c(48): warning:  #177-D: variable "max_WL"  was declared but never referenced
+main.c(51): warning:  #177-D: variable "max_WL"  was declared but never referenced
   static short max_WL = 200; //Define absolute max water level of tank (Liters)
-main.c(49): warning:  #177-D: variable "alert_WL"  was declared but never referenced
+main.c(52): warning:  #177-D: variable "alert_WL"  was declared but never referenced
   static short alert_WL = 180;  //What WL should give alert.
-main.c(65): warning:  #177-D: function "App_ObjCreate"  was declared but never referenced
+main.c(68): warning:  #177-D: function "App_ObjCreate"  was declared but never referenced
   static void App_ObjCreate  (void);
-main.c(66): warning:  #177-D: function "App_TaskCreate"  was declared but never referenced
+main.c(69): warning:  #177-D: function "App_TaskCreate"  was declared but never referenced
   static void App_TaskCreate(void);
-main.c: 18 warnings, 0 errors
-compiling bsp.c...
+main.c: 21 warnings, 0 errors
+compiling os_app_hooks.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
-Software\user\BSP\bsp.c: 2 warnings, 0 errors
+Software\user\configuration_os\os_app_hooks.c: 2 warnings, 0 errors
 assembling cpu_a.s...
 compiling app_hooks.c...
 Software\user\configuration_os\./../../../Board/adc/adc.h(12): warning:  #1-D: last line of file ends without a newline
@@ -96,18 +108,12 @@ Software\user\configuration_os\./../../../Board/button_EXINT/button.h(12): warni
 .\Software\user\configuration_os\os_cfg.h(102): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 52 of ".\Software\user\configuration_os\app_cfg.h")
   #define OS_CFG_TMR_EN                   1u   /* Enable (1) or Disable (0) code generation for TIMERS                  */
 Software\user\configuration_os\app_hooks.c: 4 warnings, 0 errors
-compiling os_app_hooks.c...
-.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TASK_DEL_EN 1
-.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TMR_EN 1
-Software\user\configuration_os\os_app_hooks.c: 2 warnings, 0 errors
-compiling cpu_c.c...
 compiling cpu_core.c...
+compiling cpu_c.c...
 compiling csp.c...
-compiling csp_gpio.c...
 compiling csp_int.c...
 compiling csp_pm.c...
+compiling csp_gpio.c...
 assembling lib_mem_a.asm...
 compiling lib_ascii.c...
 compiling csp_tmr.c...
@@ -126,18 +132,18 @@ compiling os_dbg.c...
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_dbg.c: 2 warnings, 0 errors
-compiling os_core.c...
-.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TASK_DEL_EN 1
-.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TMR_EN 1
-Software\uCOS-III\Source\os_core.c: 2 warnings, 0 errors
 compiling os_flag.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_flag.c: 2 warnings, 0 errors
+compiling os_core.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_core.c: 2 warnings, 0 errors
 compiling os_int.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
@@ -192,30 +198,24 @@ compiling os_sem.c...
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_sem.c: 2 warnings, 0 errors
-compiling os_task.c...
-.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TASK_DEL_EN 1
-.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TMR_EN 1
-Software\uCOS-III\Source\os_task.c: 2 warnings, 0 errors
-compiling os_tick.c...
-.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TASK_DEL_EN 1
-.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
-  #define OS_CFG_TMR_EN 1
-Software\uCOS-III\Source\os_tick.c: 2 warnings, 0 errors
 compiling os_time.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Source\os_time.c: 2 warnings, 0 errors
-compiling os_tmr.c...
+compiling os_tick.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
-Software\uCOS-III\Source\os_tmr.c: 2 warnings, 0 errors
+Software\uCOS-III\Source\os_tick.c: 2 warnings, 0 errors
+compiling os_task.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_task.c: 2 warnings, 0 errors
 compiling os_var.c...
 .\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TASK_DEL_EN 1
@@ -228,6 +228,12 @@ compiling os_csp.c...
 .\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
   #define OS_CFG_TMR_EN 1
 Software\uCOS-III\Ports\ARM-Cortex-M3\CSP\os_csp.c: 2 warnings, 0 errors
+compiling os_tmr.c...
+.\Software\user\configuration_os\app_cfg.h(51): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TASK_DEL_EN"  (declared at line 87 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TASK_DEL_EN 1
+.\Software\user\configuration_os\app_cfg.h(52): warning:  #47-D: incompatible redefinition of macro "OS_CFG_TMR_EN"  (declared at line 102 of ".\Software\user\configuration_os\os_cfg.h")
+  #define OS_CFG_TMR_EN 1
+Software\uCOS-III\Source\os_tmr.c: 2 warnings, 0 errors
 assembling os_cpu_a.s...
 compiling AsciiLib.c...
 compiling os_cpu_c.c...
@@ -259,9 +265,9 @@ compiling system_LPC17xx.c...
 linking...
 .\Objects\os_micrium_landtiger.axf: Warning: L6914W: option ropi ignored when using --scatter.
 .\Objects\os_micrium_landtiger.axf: Warning: L6914W: option rwpi ignored when using --scatter.
-Program Size: Code=26780 RO-data=2312 RW-data=400 ZI-data=32900  
+Program Size: Code=27284 RO-data=2312 RW-data=408 ZI-data=34860  
 Finished: 0 information, 2 warning and 0 error messages.
-".\Objects\os_micrium_landtiger.axf" - 0 Error(s), 73 Warning(s).
+".\Objects\os_micrium_landtiger.axf" - 0 Error(s), 76 Warning(s).
 
 <h2>Software Packages used:</h2>
 
