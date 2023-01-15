@@ -7,6 +7,7 @@
  * This software is supplied "AS IS" without warranties of any kind.
  *
  * Copyright (c) 2017 Politecnico di Torino. All rights reserved.
+ * Proposed Solution
  *----------------------------------------------------------------------------*/
                   
 #include "LPC17xx.H"                    /* LPC17xx definitions                */
@@ -44,17 +45,14 @@ static  CPU_STK_SIZE  TT_STACK[APP_CFG_TASK_STK_SIZE];
 uint16_t position = 0;
 uint16_t counter = 0;
 static int s = 200;
-static int caught = 0;
-
 static short max_WL = 200; //Define absolute max water level of tank (Liters)
 static short alert_WL = 180;  //What WL should give alert.
 double WL = 150; //Start water level at 150L - actual water level
 unsigned char WL_r = 0; //Read water level
-int outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
-uint8_t * val1[16];
-OS_SEM sem_counter;
-OS_SEM sem_position;
+int outW, fill = 0; //How to make theese double or something without going over memory limit?
 
+static int caught = 0; //Added a variable to track how many errors have been caught
+uint8_t * val1[16];
 
 /*
 *********************************************************************************************************
@@ -103,8 +101,6 @@ int  main (void)
 		CPU_IntDis(); 					/*disable interrupt*/
     CPU_Init();   					/*init cpu*/
     Mem_Init();							/*Memory initialization*/
-		
-
     OSInit(&err);						/* Initialize "uC/OS-III, The Real-Time Kernel"         */
 		
 		LCD_Clear(White);
@@ -113,12 +109,13 @@ int  main (void)
 		/*
 	
 	
-			Here you can implement timers!
+			Here you can create timers!
 		
 	
 		*/
 	
-		OSTmrCreate(&TTTmr,         				/* p_tmr          */
+		/* Timing test / watchdog implemented to keep track of rougue for-loop - manually reset by sensor -read */ 
+		OSTmrCreate( &TTTmr,         				/* p_tmr          */
 										"Timing_test_timer",           	   /* p_name         */
 										0,                    /* dly            */
 										2,                    /* period =200ms       */
@@ -129,7 +126,7 @@ int  main (void)
 	
 	
 	
-		//Create timer to calculate waterlevel which fires every 1s
+		//Create timer to read waterlevel which fires every 1s
 		OSTmrCreate(&WLTmr,         				/* p_tmr          */
 									 "Water_level_timer",           	   /* p_name         */
 										10,                    /* dly            */
@@ -175,14 +172,14 @@ static  void  APP_TSK (void *p_arg)
 		OS_ERR  os_err;
 		OS_ERR err;
 		CPU_BOOLEAN  status;
+	
 		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
 		LCD_Initialization(); //Init LCD OBS: Update GLCD.c if using LAB board.
 		joystick_init();
 		BUTTON_init();
 		
-	
-		LCD_Clear(White);	
 		//Draw initial watertank and static elements
+		LCD_Clear(White);	
 	  LCD_DrawLine(0, 119, 100, 119, Black);
 	  LCD_DrawLine(100, 120, 100, 320, Black);
 		//GUI_Text( 10, 100, &s, Black, White);
@@ -193,7 +190,6 @@ static  void  APP_TSK (void *p_arg)
 		while (i<WL){
 			int level = 320-i;
 			LCD_DrawLine(0, level, 99, level, Blue);
-			//LCD_DrawLine(140, level, 240, level, Blue);
 			i=i+1;
 		}
 		
@@ -212,16 +208,12 @@ static  void  APP_TSK (void *p_arg)
 			}
 			else
 				if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joystick down --does nothing  */
-				//GUI_Text(0,0,"D", Black, White);
-				//unsigned char bit_pos = rand() % 8;
-				//WL_r ^= (1 << bit_pos); //Flips bit in read value
+
 			}
 
-			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left - flips random bit in drain */
-				//GUI_Text(0,0,"L", Black, White);
+			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left - does nothing */
 				unsigned char bit_pos = rand() %4;
-				drain ^=(1 << bit_pos);
-				//Flip Drain
+
 			}
 
 			else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right - flips random bit in fill  */
@@ -239,6 +231,7 @@ static  void  APP_TSK (void *p_arg)
 
 */
 
+/*  Callback function for watchdog */
 void TTTmr_callback(OS_TMR  *p_tmr,
                      void    *p_arg){
 	OS_ERR err;
@@ -322,21 +315,21 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	TODO: Implement one or more acceptance test with basis in the task description and theory
 	*/
 	 
-	OSTmrStart(&TTTmr, &err);
+	OSTmrStart(&TTTmr, &err); //Start the watchdog timer
 	
 	while(s > WL){ //Simulate reading sensor
 		s= s-1;
 	}
 	WL_r = s;
 	s=199;
+	
+	//Stop the timer - indicating the sensor has not gone rougue
 	OSTmrStop(
 				&TTTmr, //timer pointer
 				OS_OPT_TMR_NONE,//opts
 				0,							//args
 				&err					//err
-	); //Stop if we have done something
-	
-
+	);
 	
 	
 	//Display read Water level
@@ -346,12 +339,11 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	
 	
 	//Decide what to do based on water level
-	if(WL_r>180){
+	if(WL_r>170){
 		fill=0;	
-    drain = 3;
 	} else {
 		drain = 0;
-		fill = 1+ outW*2-WL_r/100;
+		fill = 1+ outW-WL_r/100;
 	}
 	
 }
@@ -363,7 +355,6 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 //Do not touch, but feel free to read.
 void OUTPUT (void *p_arg)
 {
-
 	(void)p_arg;
 	OS_ERR err;
 
@@ -374,7 +365,7 @@ void OUTPUT (void *p_arg)
   outW = (double)(rand() % 1500) / 1000;
 
   // Update the value of WL based on the values of outW, drain, and fill
-  WL = WL - outW - drain + fill;
+  WL = WL - outW + fill;
 	tostring(&val1, WL);
   // Display the updated value of WL on the screen
 	GUI_Text(150, 50, "   ", White, Blue);
@@ -391,6 +382,7 @@ void OUTPUT (void *p_arg)
 		GUI_Text(110, 240, "TANK OVERFLOW", White, Red);
 	}
 	LCD_DrawLine(0, 119, 100, 119, Black);
+	
   // If the value of WL has increased, draw blue lines on the screen
   if (WL_old < WL) {
     for (int i = WL_old; i < WL; i++) {
@@ -398,6 +390,7 @@ void OUTPUT (void *p_arg)
       LCD_DrawLine(0, level, 99, level, Blue);
     }
   }
+	
   // If the value of WL has decreased, draw white lines on the screen
   else if (WL_old > WL) {
     for (int i = WL_old; i > WL; i--) {
@@ -406,6 +399,9 @@ void OUTPUT (void *p_arg)
     }
   }
 }
+
+
+
 
 static int   tostring( uint8_t * str, int num ){
     int i, rem, len = 0, n;
