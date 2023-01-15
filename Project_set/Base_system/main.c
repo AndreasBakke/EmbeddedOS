@@ -37,19 +37,17 @@ static  CPU_STK_SIZE	OUTPUT_STACK[APP_CFG_TASK_STK_SIZE];
 
 
 
+
 /* Global Variables*/
 uint16_t position = 0;
 uint16_t counter = 0;
 static int s = 0;
-
 static short max_WL = 200; //Define absolute max water level of tank (Liters)
 static short alert_WL = 180;  //What WL should give alert.
 double WL = 150; //Start water level at 150L - actual water level
 unsigned char WL_r = 0; //Read water level
-int outW, drain, fill = 0; //How to make theese double or something without going over memory limit?
+int outW, fill = 0; // 
 uint8_t * val1[16];
-OS_SEM sem_counter;
-OS_SEM sem_position;
 
 /*
 *********************************************************************************************************
@@ -96,8 +94,6 @@ int  main (void)
 		CPU_IntDis(); 					/*disable interrupt*/
     CPU_Init();   					/*init cpu*/
     Mem_Init();							/*Memory initialization*/
-		
-
     OSInit(&err);						/* Initialize "uC/OS-III, The Real-Time Kernel"         */
 		
 		LCD_Clear(White);
@@ -106,15 +102,13 @@ int  main (void)
 		/*
 	
 	
-			Here you can implement timers!
+			Here you can create timers!
 		
 	
 		*/
 	
 	
-	
-	
-		//Create timer to calculate waterlevel which fires every 1s
+		//Create timer to read waterlevel which fires every 1s
 		OSTmrCreate(&WLTmr,         				/* p_tmr          */
 									 "Water_level_timer",           	   /* p_name         */
 										10,                    /* dly            */
@@ -160,14 +154,14 @@ static  void  APP_TSK (void *p_arg)
 		OS_ERR  os_err;
 		OS_ERR err;
 		CPU_BOOLEAN  status;
+	
 		BSP_OS_TickEnable(); /* Enable the tick timer and interrupt                  */
 		LCD_Initialization(); //Init LCD OBS: Update GLCD.c if using LAB board.
 		joystick_init();
 		BUTTON_init();
 		
-	
-		LCD_Clear(White);	
 		//Draw initial watertank and static elements
+		LCD_Clear(White);	
 	  LCD_DrawLine(0, 119, 100, 119, Black);
 	  LCD_DrawLine(100, 120, 100, 320, Black);
 		GUI_Text( 10, 100, &s, Black, White);
@@ -177,7 +171,6 @@ static  void  APP_TSK (void *p_arg)
 		while (i<WL){
 			int level = 320-i;
 			LCD_DrawLine(0, level, 99, level, Blue);
-			//LCD_DrawLine(140, level, 240, level, Blue);
 			i=i+1;
 		}
 		
@@ -197,16 +190,12 @@ static  void  APP_TSK (void *p_arg)
 			}
 			else
 				if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	/* Joystick down --does nothing  */
-				//GUI_Text(0,0,"D", Black, White);
-				//unsigned char bit_pos = rand() % 8;
-				//WL_r ^= (1 << bit_pos); //Flips bit in read value
+				
 			}
 
-			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left - flips random bit in drain */
-				//GUI_Text(0,0,"L", Black, White);
+			else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){	/* Joystick Left - */
 				unsigned char bit_pos = rand() %4;
-				drain ^=(1 << bit_pos);
-				//Flip Drain
+				
 			}
 
 			else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){	/* Joytick right - flips random bit in fill  */
@@ -266,7 +255,6 @@ void OutputTmr_callback(OS_TMR  *p_tmr,
 }
 										 
 
-
 void READ_WL (void *p_arg) //Reads water level and creates task
 {
 	(void)p_arg;
@@ -282,25 +270,17 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	}
 	WL_r = s;
 	s=200;
-	 
-	
-	
-	
-	
 	
 	//Display read Water level
 	tostring((uint8_t*) val1, WL_r);
 	GUI_Text( 150, 20, "   ", Black, White);
 	GUI_Text( 150, 20, (uint8_t *) val1, Black, White);
 	
-	
 	//Decide what to do based on water level
-	if(WL_r>180){
+	if(WL_r>170){
 		fill=0;	
-    drain = 3;
 	} else {
-		drain = 0;
-		fill = 1+ outW*2-WL_r/100;
+		fill = 1+ outW-WL_r/100;
 	}
 }
 
@@ -309,9 +289,9 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 
 //Simulates "analog system". Draining water, and displaying what the actual WL is.
 //Do not touch, but feel free to read.
+//Runs every 1/10th of a second
 void OUTPUT (void *p_arg)
 {
-
 	(void)p_arg;
 	OS_ERR err;
 
@@ -322,13 +302,12 @@ void OUTPUT (void *p_arg)
   outW = (double)(rand() % 1500) / 1000;
 
   // Update the value of WL based on the values of outW, drain, and fill
-  WL = WL - outW - drain + fill;
+  WL = WL - outW + fill;
+	 // Display the updated value of WL on the screen
 	tostring(&val1, WL);
-  // Display the updated value of WL on the screen
 	GUI_Text(150, 50, "   ", White, Blue);
   GUI_Text(150, 50, (uint8_t*)val1, White, Blue);
   
-
   // Ensure that WL never goes below 0 and display warning if it does.
   if (WL <= 0) {
     WL = 0;
@@ -339,6 +318,7 @@ void OUTPUT (void *p_arg)
 		GUI_Text(110, 240, "TANK OVERFLOW", White, Red);
 	}
 	LCD_DrawLine(0, 119, 100, 119, Black);
+	
   // If the value of WL has increased, draw blue lines on the screen
   if (WL_old < WL) {
     for (int i = WL_old; i < WL; i++) {
@@ -346,6 +326,7 @@ void OUTPUT (void *p_arg)
       LCD_DrawLine(0, level, 99, level, Blue);
     }
   }
+	
   // If the value of WL has decreased, draw white lines on the screen
   else if (WL_old > WL) {
     for (int i = WL_old; i > WL; i--) {
@@ -354,6 +335,10 @@ void OUTPUT (void *p_arg)
     }
   }
 }
+
+
+
+
 
 static int   tostring( uint8_t * str, int num ){
     int i, rem, len = 0, n;
