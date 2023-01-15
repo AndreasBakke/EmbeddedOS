@@ -1,7 +1,8 @@
 /*----------------------------------------------------------------------------
  * Name:    main.c
- * Purpose: 
- * Note(s):
+ * Purpose:  Proposed solution to lab exercise on Real time safety and fault-injections
+ * Note(s):  Two solutions working together has been implemented. First, a "watchdog" timing test, checking for a deadline miss.
+ *           Secondly a dedicated monitoring task, monitoring values of importance, and looking for change.
  *----------------------------------------------------------------------------
  *
  * This software is supplied "AS IS" without warranties of any kind.
@@ -114,7 +115,7 @@ int  main (void)
 	
 		*/
 	
-		/* Timing test / watchdog implemented to keep track of rougue for-loop - manually reset by sensor -read */ 
+		/* Timing test / watchdog implemented to keep track of deadline miss - manually reset by sensor-read */ 
 		OSTmrCreate( &TTTmr,         				/* p_tmr          */
 										"Timing_test_timer",           	   /* p_name         */
 										0,                    /* dly            */
@@ -296,14 +297,29 @@ void TIMING_TEST (void *p_arg) //If we reach this, the timing_test timer has run
 	(void)p_arg;
 	OS_ERR err;
 	caught = caught +1;
-	OSTaskDel(&READ_WL, &err);
 	tostring((uint8_t*) val1, caught);
-	//Do something safe! This could be same value as last time. Set to match output? Dynamically? Do Nothing?
+	
+	
+	//Two recovery-options: Gracefull degredation vs Hard recovery
+	/*Gracefull degredation: Alter system to reach deadline. 
+	Example: set timer a lot lower than deadline, then reset task to "try again".
+	Example2: Alter priorities, and temporarily grant task higher priority
+	Usefull when the error is "non critical" eg. we still have time to try to fix it
+	*/
+	
+	/* Hard recovery: Switch to a safe state (Do something safe!)
+	Example1: Stop task and do the same as last time
+	Example2: Stop task and close the valve is the last WL was high, and open if the las WL was low. (Or based of last N readings)
+	
+	Usefull when we no longer have time to fix the problem. What defines a "safe state" depends on the system functionality and requirements
+	Examples of "safe": Same as last time, match some other variable, do nothing.
+	*/
+	
+	//Here we do a hard recovery
+	OSTaskDel(&READ_WL, &err);
 	fill = 0; //example
-	drain = 0;
 	s=200;
 	GUI_Text( 150, 70, (uint8_t *) val1, Black, White);
-	
 }
 
 void READ_WL (void *p_arg) //Reads water level and creates task
@@ -323,13 +339,6 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	WL_r = s;
 	s=199;
 	
-	//Stop the timer - indicating the sensor has not gone rougue
-	OSTmrStop(
-				&TTTmr, //timer pointer
-				OS_OPT_TMR_NONE,//opts
-				0,							//args
-				&err					//err
-	);
 	
 	
 	//Display read Water level
@@ -342,9 +351,17 @@ void READ_WL (void *p_arg) //Reads water level and creates task
 	if(WL_r>170){
 		fill=0;	
 	} else {
-		drain = 0;
 		fill = 1+ outW-WL_r/100;
 	}
+	
+	
+	//Stop the timer - indicating that deadline has been met, and system was not delayed significantly 
+	OSTmrStop(
+				&TTTmr, //timer pointer
+				OS_OPT_TMR_NONE,//opts
+				0,							//args
+				&err					//err
+	);
 	
 }
 
