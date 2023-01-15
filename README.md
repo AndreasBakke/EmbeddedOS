@@ -7,5 +7,6 @@ MicriumOS lab assignments tested and verified on PowerMCU LandTiger v2.0 board.
 
 
 Base project & proposed solution verified on PowerMCU LandTiger v2.0. 
+IMPORTANT: If LCD only displays white, update DeviceCode in /Board/GLCD/GLCD.c
 
 All files for personal use.
